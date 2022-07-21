@@ -1,11 +1,12 @@
 <template>
     <div class="w-600 mx-auto">
         <p>hello dice</p>
-        <button @click="rollDice">躑骰子</button>
+        <button @click="rollDice" :disabled="!isAllowRolling">躑骰子</button>
         <button @click="diceReset">Reset</button>
         <div class="box" :ref="(el) => dice.containerRef = el">
             <transition
                 :name="dice.transName"
+                :css="transSwitch"
             >
                 <img v-if="dice.currentType == 'purple'" key="purple" class="dice"  src="@/assets/dice_defaultPurple.png" width="120" height="120" />
                 <img v-else-if="dice.currentType  == 'blue'" key="blue" class="dice"  src="@/assets/dice_defaultBlue.png" width="120" height="120" />
@@ -17,7 +18,7 @@
 </template>    
 
 <script>
-import { reactive, onMounted, onUnmounted, watch, nextTick } from 'vue'
+import { reactive, ref, onMounted, onUnmounted, watch, nextTick } from 'vue'
 export default {
     name: "DiceRolling",
     setup() {        
@@ -30,6 +31,9 @@ export default {
             transName: 'dice-trans', //dice transition name
             containerRef: null // dice box element
         })
+        const transSwitch = ref(true)
+        const isFirstRolling = ref(true)
+        const isAllowRolling = ref(true)
 
         //animation
         //骰子自動漸變
@@ -50,6 +54,9 @@ export default {
             }
             dice.gleamAnimationFrame = requestAnimationFrame(autoSwitchDice)
         }
+
+        const delay = (n) => new Promise( r => setTimeout(r, n*1000) )
+
         //change transition name to roll dice
         async function rollDice() {
             cancelAnimationFrame(dice.gleamAnimationFrame)
@@ -57,17 +64,34 @@ export default {
 
             // Notice: try to clear dice shadow
             if(dice.gleamList.indexOf(dice.currentType) !== -1) {
-                dice.containerRef.children[0].className = 'dice dice-rolling-leave-active dice-rolling-leave-to'
+                dice.containerRef.children[0].setAttribute('height', 0)
             }
-            
-            await nextTick()
+
             dice.currentType = dice.currentType === 'win' ? 'lose' : 'win'
+
+
+            
+            if(isFirstRolling.value) {
+                isAllowRolling.value = false
+                await delay(2)
+            }
+            isFirstRolling.value = false
+            isAllowRolling.value = true
+
         }
 
+        //reset
         //reset dice status
-        function diceReset() {
+        async function diceReset() {
+            isAllowRolling.value = true
+            isFirstRolling.value = true
+            transSwitch.value = false
+            await delay(0.5)
             dice.currentType = 'purple'
             dice.transName = 'dice-trans'
+            await delay(0.5)
+            transSwitch.value = true
+            cancelAnimationFrame(dice.gleamAnimationFrame)
             autoSwitchDice()
         }
 
@@ -89,7 +113,9 @@ export default {
         return {
             dice,
             rollDice,
-            diceReset
+            diceReset,
+            transSwitch,
+            isAllowRolling
         }
     }
 }
@@ -101,6 +127,10 @@ export default {
 }
 .mx-auto {
     margin: 0 auto;
+}
+
+.d-none {
+    display: none;
 }
 .box {
     position: relative;
