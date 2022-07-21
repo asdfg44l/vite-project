@@ -1,11 +1,11 @@
-import { createRouter, createWebHashHistory } from 'vue-router'
-import './modulesLoader'
+import { createRouter, createWebHashHistory } from "vue-router";
+import "./modulesLoader";
 //route modules
-import modules from './modulesLoader'
+import modules from "./modulesLoader";
 
 const router = createRouter({
-    history: createWebHashHistory(),
-    routes: modules
-})
+  history: createWebHashHistory(),
+  routes: modules,
+});
 
-export default router
+export default router;

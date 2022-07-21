@@ -1,15 +1,14 @@
 <template>
-  <router-view></router-view>
+  <Layout />
 </template>
 
 <script>
-import { ref } from 'vue';
+import Layout from "@/layouts/Layout.vue";
+
 export default {
-  setup() {
-    const message = ref("")
-
-    return { message }
+  components: {
+    Layout,
   },
-}
+  setup(props, context) {},
+};
 </script>
-

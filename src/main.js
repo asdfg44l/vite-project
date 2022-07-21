@@ -1,15 +1,12 @@
-import { createApp } from 'vue'
-import App from './App.vue'
-import router from './router'
-import store from './store'
-//plugins
-import { VueAxios } from './plugins/axios'
-import { formatPlugin } from './plugins/format'
+import { createApp } from "vue";
+import App from "./App.vue";
+//plugins'
+import "virtual:windi.css";
+import "virtual:svg-icons-register";
+import { APP_INITIAL } from "./plugins/initial";
 
-const app = createApp(App)
+const app = createApp(App);
 
-app.use(router)
-app.use(VueAxios)
-app.use(formatPlugin)
-app.use(store)
-app.mount('#app')
+APP_INITIAL(app);
+
+app.mount("#app");
