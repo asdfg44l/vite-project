@@ -4,15 +4,16 @@
         <button @click="rollDice" :disabled="!isAllowRolling">躑骰子</button>
         <button @click="diceReset">Reset</button>
         <div class="box" :ref="(el) => dice.containerRef = el">
-            <transition
+            <transition-group
                 :name="dice.transName"
-                :css="transSwitch"
+                :css="isAllowTransition"
+                @after-leave="diceAfterLeave"
             >
                 <img v-if="dice.currentType == 'purple'" key="purple" class="dice"  src="@/assets/dice_defaultPurple.png" width="120" height="120" />
                 <img v-else-if="dice.currentType  == 'blue'" key="blue" class="dice"  src="@/assets/dice_defaultBlue.png" width="120" height="120" />
                 <img v-else-if="dice.currentType  == 'win'" key="win" class="dice"  src="@/assets/dice_win.png" width="120" height="120" />
                 <img v-else-if="dice.currentType  == 'lose'" key="lose" class="dice"  src="@/assets/dice_lose.png" width="120" height="120" />
-            </transition>
+            </transition-group>
         </div>
     </div>
 </template>    
@@ -31,15 +32,14 @@ export default {
             transName: 'dice-trans', //dice transition name
             containerRef: null // dice box element
         })
-        const transSwitch = ref(true)
         const isFirstRolling = ref(true)
         const isAllowRolling = ref(true)
+        const isAllowTransition = ref(true)
 
         //animation
         //骰子自動漸變
         function autoSwitchDice(timestamp) {
             if (!dice.gleamStartTime) dice.gleamStartTime = timestamp
-
             //根據 gleamList的順序切換當前骰子
             const switchDice = () => {
                 const diceCurrentIndex = dice.gleamList.indexOf(dice.currentType)
@@ -49,13 +49,13 @@ export default {
             }
             //每 1.2秒漸變一次
             if(timestamp - dice.gleamStartTime > 1200) {
+                isAllowTransition.value = true
                 switchDice()
                 dice.gleamStartTime = timestamp
             }
             dice.gleamAnimationFrame = requestAnimationFrame(autoSwitchDice)
         }
 
-        const delay = (n) => new Promise( r => setTimeout(r, n*1000) )
 
         //change transition name to roll dice
         async function rollDice() {
@@ -67,42 +67,42 @@ export default {
                 dice.containerRef.children[0].setAttribute('height', 0)
             }
 
+            await nextTick()
+
             dice.currentType = dice.currentType === 'win' ? 'lose' : 'win'
-
-
             
-            if(isFirstRolling.value) {
-                isAllowRolling.value = false
-                await delay(2)
-            }
+            if(isFirstRolling.value) isAllowRolling.value = false
             isFirstRolling.value = false
-            isAllowRolling.value = true
+        }
 
+        //transition hooks
+        function diceAfterLeave(el) {
+            isAllowRolling.value = true
         }
 
         //reset
         //reset dice status
         async function diceReset() {
-            isAllowRolling.value = true
-            isFirstRolling.value = true
-            transSwitch.value = false
-            await delay(0.5)
+            //避免重置時露出破綻
+            isAllowRolling.value = false
+            isFirstRolling.value = true //重置為初次擲骰
+            //避免重置骰子樣式時產生 transition
+            isAllowTransition.value = false
             dice.currentType = 'purple'
             dice.transName = 'dice-trans'
-            await delay(0.5)
-            transSwitch.value = true
+            //先清除 AnimationFrame再打開，以避免錯誤
             cancelAnimationFrame(dice.gleamAnimationFrame)
             autoSwitchDice()
         }
 
-        watch(
-            () => dice.currentType,
-            val => {
-                if(val === 'win' | val === 'lose') {
-                    console.log('Dice Rolling!!!!!!')
-                } 
-            }
-        )
+        // watch(
+        //     () => dice.currentType,
+        //     val => {
+        //         if(val === 'win' | val === 'lose') {
+        //             console.log('Dice Rolling!!!!!!')
+        //         } 
+        //     }
+        // )
 
         onMounted(() => {
             autoSwitchDice()
@@ -114,8 +114,9 @@ export default {
             dice,
             rollDice,
             diceReset,
-            transSwitch,
-            isAllowRolling
+            isAllowRolling,
+            isAllowTransition,
+            diceAfterLeave
         }
     }
 }
@@ -128,10 +129,13 @@ export default {
 .mx-auto {
     margin: 0 auto;
 }
-
 .d-none {
-    display: none;
+    display: none !important;
 }
+.stop-animation {
+    animation: none !important;
+}
+
 .box {
     position: relative;
     width: 400px;
