@@ -8,12 +8,11 @@
             <transition
                 :name="dice.transName"
                 :css="isAllowTransition"
-                @animationend="onDiceAnimationEnd"
             >
                 <img v-if="dice.currentType == 'purple'" key="purple" class="dice"  src="@/assets/dice_defaultPurple.png" width="120" height="120" alt/>
                 <img v-else-if="dice.currentType  == 'blue'" key="blue" class="dice"  src="@/assets/dice_defaultBlue.png" width="120" height="120" alt/>
-                <img v-else-if="dice.currentType  == 'win'" key="win" class="dice" :class="{'dice-outcome--win': isShowOutcome}" src="@/assets/dice_win.png" width="120" height="120" alt/>
-                <img v-else-if="dice.currentType  == 'lose'" key="lose" class="dice" :class="{'dice-outcome--lose': isShowOutcome}"  src="@/assets/dice_lose.png" width="120" height="120" alt/>
+                <img v-else-if="dice.currentType  == 'win'" key="win" class="dice dice-outcome--win" src="@/assets/dice_win.png" width="120" height="120" alt/>
+                <img v-else-if="dice.currentType  == 'lose'" key="lose" class="dice dice-outcome--lose" src="@/assets/dice_lose.png" width="120" height="120" alt/>
             </transition>
             <!-- outcome -->
             <div
@@ -27,7 +26,7 @@
 
 <script>
 import { computed } from '@vue/reactivity'
-import { reactive, ref, onMounted, onUnmounted } from 'vue'
+import { reactive, ref, onMounted, onUnmounted, nextTick } from 'vue'
 export default {
     name: "DiceRolling",
     setup() {        
@@ -69,23 +68,17 @@ export default {
 
         //change transition name to roll dice
         async function rollDice() {
-            isShowOutcome.value = false //清除上一輪的結果
+            // isShowOutcome.value = false //清除上一輪的結果
+
             cancelAnimationFrame(dice.gleamAnimationFrame) //清掉骰子漸變效果
             dice.transName = dice.transName === 'dice-rolling' ? dice.transName : 'dice-rolling' //transition 換成 rolling效果
-
+            
             // Notice: try to clear dice shadow
             if(isDefaultDice.value) {
                 dice.containerRef.children[0].className = 'd-none'
             }
 
             dice.currentType = dice.currentType === 'win' ? 'lose' : 'win'
-        }
-
-        //transition hooks
-        function onDiceAnimationEnd(e) {
-            const isDiceRollingTrans = e.animationName.match('dice-rolling')
-            console.log(e.animationName)
-            if(isDiceRollingTrans) isShowOutcome.value = true
         }
 
         //reset
@@ -162,11 +155,19 @@ export default {
     &-rolling-leave-active {
         animation: dice-fade-in 0.8s reverse, dice-rolling .2s 4 linear, dice-bounce .8s linear !important;
     }
-    &-outcome--win {
-        animation: dice-sway .25s linear;
-    }
-    &-outcome--lose {
-        animation: dice-shake .25s linear;
+    &:not(.dice-rolling-enter-active) {
+        &.dice-outcome--win {
+            animation: dice-sway .25s linear;
+            & + .outcome-glow {
+                display: block !important;
+            }
+        }
+        &.dice-outcome--lose {
+            animation: dice-shake .25s linear;
+            & + .outcome-glow {
+                display: block !important;
+            }
+        }
     }
 }
 
@@ -208,6 +209,7 @@ export default {
 }
 
 .outcome-glow {
+    display: none;
     position: absolute;
     left: 50%;
     bottom: calc(400px * 0.35);
