@@ -105,8 +105,7 @@ export default {
             rollDice,
             diceReset,
             isAllowTransition,
-            isShowOutcome,
-            onDiceAnimationEnd
+            isShowOutcome
         }
     }
 }
