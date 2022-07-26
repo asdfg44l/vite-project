@@ -15,12 +15,14 @@
 <script>
     import { ref, watch } from 'vue'
     export default {
-        setup() {
+        emits: ['update:ratio'],
+        setup(props, { emit }) {
             const rate = ref(50)
             const sliderBar = ref(null)
 
             function onRangeSliderChange(val) {
                 sliderBar.value.style['backgroundSize'] = `${val}% 100%`
+                emit('update:ratio', { ratio: val })
             }
 
             watch(

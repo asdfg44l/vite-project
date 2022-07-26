@@ -6,7 +6,7 @@
         </a>
     </router-link>
     <!-- <DiceRolling /> -->
-    <RangeSliders />
+    <RangeSliders @update:ratio="handleRatioUpdate"/>
 </template>
 
 <script>
@@ -15,7 +15,13 @@ import RangeSliders from '../components/RangeSliders.vue'
 export default {
     components: { RangeSliders },
     setup() {
-        
+        function handleRatioUpdate(payload) {
+            console.log({payload})
+        }
+
+        return {
+            handleRatioUpdate
+        }
     },
 }
 </script>
