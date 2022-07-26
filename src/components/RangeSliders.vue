@@ -5,11 +5,11 @@
                 <span class="slider-digit" v-for="digit in [0, 25, 50, 75, 100]" :key="digit">{{digit}}</span>
             </div>
             <div class="slider-warp">
-                <input class="slider" ref="sliderBar" v-model="rate" type="range" min="1" max="100" name="rate" />
+                <input class="slider" ref="sliderBar" v-model="ratio" type="range" min="1" max="100" name="ratio" />
             </div>
         </div>
     </div> 
-    <p class="mx-auto text-center">{{rate}}</p>
+    <p class="mx-auto text-center">{{ratio}}</p>
 </template>
 
 <script>
@@ -17,7 +17,7 @@
     export default {
         emits: ['update:ratio'],
         setup(props, { emit }) {
-            const rate = ref(50)
+            const ratio = ref(50)
             const sliderBar = ref(null)
 
             function onRangeSliderChange(val) {
@@ -26,11 +26,11 @@
             }
 
             watch(
-                () => rate.value,
+                () => ratio.value,
                 val => onRangeSliderChange(val)
             )
             return {
-                rate,
+                ratio,
                 sliderBar
             }
         }
