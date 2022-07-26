@@ -1,8 +1,13 @@
 <template>
-    <div class="slider-container w-500 mx-auto">
-        <input class="slider" v-model="rate" type="range" min="1" max="100" name="rate">
-        <p>{{ rate }}</p>
-    </div>
+    <div class="bg-black">
+        <div class="slider-container w-500 mx-auto">
+            <div class="slider-digit-bar d-flex justify-content-between align-items-center">
+                <span class="slider-digit" v-for="digit in [0, 25, 50, 75, 100]" :key="digit">{{digit}}</span>
+            </div>
+            <input class="slider" v-model="rate" type="range" min="1" max="100" name="rate">
+        </div>
+    </div> 
+    <p class="mx-auto text-center">{{rate}}</p>
 </template>
 
 <script>
@@ -32,7 +37,7 @@ $upper-background: linear-gradient(to bottom, $upper-color, $upper-color) 100% 5
 $lower-background: linear-gradient(to bottom, $lower-color, $lower-color) 100% 50% / 100% $track-height no-repeat transparent;
 
 //border-radius
-$border-radius: 50%;
+$border-radius: 48%;
 
 // Webkit cannot style progress so we fake it with a long shadow
 // on the thumb element
@@ -51,13 +56,41 @@ $border-radius: 50%;
 .mx-auto {
     margin: 0 auto;
 }
+.text-center {
+    text-align: center;
+}
+
+//flex
+.d-flex {
+    display: flex;
+}
+.justify-content-between {
+    justify-content: space-between;
+}
+
+.bg-black {
+    padding: 10px 0;
+    background-color: black;
+}
 
 //slider
 .slider {
+    &-container {
+        padding: .5rem .75rem;
+        border-radius: 6px;
+        background: linear-gradient(180deg, #4C5572 0%, rgba(34, 44, 75, 0) 100%);
+        box-shadow: inset 0px 1px 2px rgba(0, 0, 0, 0.5);
+    }
+    &-digit {
+        &-bar { //數字長度不一樣會造成有點偏離，所以往右增加最後一個數字的一半長度
+            margin-right: -7px;
+        }
+        font-size: 12px;
+        color: #B0BBCC;
+    }
     appearance: none;
     overflow: hidden;
     height: $height;
-    border-radius: $border-radius;
     background: none;
     margin: 0;
     display: block;
@@ -67,7 +100,6 @@ $border-radius: 50%;
         width: 100%;
         height: $height;
         background: $lower-background;
-        border-radius: $border-radius;
     }
     &::-webkit-slider-thumb {
         appearance: none;
@@ -75,12 +107,9 @@ $border-radius: 50%;
         cursor: pointer;
         width: $thumb-height;
         height: $thumb-height;
-        border: 0;
         top: 50%;
         background: url('@/assets/rangeSlider-btn.png');
-        // background: $thumb-color;
-        // margin-top: calc(-$thumb-height/2);
-        margin-top: -15px;
+        margin-top: calc(-1 * $thumb-height / 2);
         box-shadow: webkit-slider-thumb-shadow();
     }
 
