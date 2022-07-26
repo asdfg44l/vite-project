@@ -4,52 +4,38 @@
             <div class="slider-digit-bar d-flex justify-content-between align-items-center">
                 <span class="slider-digit" v-for="digit in [0, 25, 50, 75, 100]" :key="digit">{{digit}}</span>
             </div>
-            <input class="slider" v-model="rate" type="range" min="1" max="100" name="rate">
+            <div class="slider-warp">
+                <input class="slider" ref="sliderBar" v-model="rate" type="range" min="1" max="100" name="rate" />
+            </div>
         </div>
     </div> 
     <p class="mx-auto text-center">{{rate}}</p>
 </template>
 
 <script>
-    import { ref } from 'vue'
+    import { ref, watch } from 'vue'
     export default {
         setup() {
             const rate = ref(50)
+            const sliderBar = ref(null)
 
+            function onRangeSliderChange(val) {
+                sliderBar.value.style['backgroundSize'] = `${val}% 100%`
+            }
+
+            watch(
+                () => rate.value,
+                val => onRangeSliderChange(val)
+            )
             return {
-                rate
+                rate,
+                sliderBar
             }
         }
     }
 </script>
 
 <style lang="scss" scoped>
-$height: 30px;
-$thumb-height: 30px;
-$track-height: 6px;
-
-// colours
-$upper-color: #6DE344;
-$lower-color: #FC0B36;
-// $thumb-color: #0199ff;
-
-$upper-background: linear-gradient(to bottom, $upper-color, $upper-color) 100% 50% / 100% $track-height no-repeat transparent;
-$lower-background: linear-gradient(to bottom, $lower-color, $lower-color) 100% 50% / 100% $track-height no-repeat transparent;
-
-//border-radius
-$border-radius: 48%;
-
-// Webkit cannot style progress so we fake it with a long shadow
-// on the thumb element
-@function webkit-slider-thumb-shadow($i: 1) {
-  $val: #{$i}px 0 0 -#{calc(($thumb-height - $track-height) / 2)} #{$upper-color};
-  @if $i == 1 {
-    @for $k from 2 through 1000 {
-      $val: #{$val}, webkit-slider-thumb-shadow($k);
-    }
-  }
-  @return $val;
-}
 .w-500 {
     width: 400px;
 }
@@ -74,8 +60,31 @@ $border-radius: 48%;
 }
 
 //slider
+$height: 30px;
+$thumb-height: 30px;
+$track-height: 6px;
+
+// colours
+$upper-color: #6DE344;
+$lower-color: #FC0B36;
+$digit-color: #B0BBCC;
 .slider {
+    appearance: none;
+    margin: 0;
+    outline: none;
+    position: relative;
+    top: 50%;
+    display: block;
+    width: 100%;
+    height: $track-height;
+    border-radius: 10px;
+    background-color: $upper-color;
+    background-image: linear-gradient(90deg, $lower-color 0 50%, $lower-color 50% 100%);
+    background-size: 50% 100%;
+    background-repeat: no-repeat;
+    
     &-container {
+        box-sizing: border-box;
         padding: .5rem .75rem;
         border-radius: 6px;
         background: linear-gradient(180deg, #4C5572 0%, rgba(34, 44, 75, 0) 100%);
@@ -86,52 +95,43 @@ $border-radius: 48%;
             margin-right: -7px;
         }
         font-size: 12px;
-        color: #B0BBCC;
+        color: $digit-color;
     }
-    appearance: none;
-    overflow: hidden;
-    height: $height;
-    background: none;
-    margin: 0;
-    display: block;
-    width: 100%;
-    outline: none;
+    &-warp {
+        height: $thumb-height;
+    }
     &::-webkit-slider-runnable-track {
         width: 100%;
-        height: $height;
-        background: $lower-background;
+        height: $thumb-height;
+        background: none;
     }
     &::-webkit-slider-thumb {
         appearance: none;
-        position: relative;
         cursor: pointer;
         width: $thumb-height;
         height: $thumb-height;
-        top: 50%;
         background: url('@/assets/rangeSlider-btn.png');
-        margin-top: calc(-1 * $thumb-height / 2);
-        box-shadow: webkit-slider-thumb-shadow();
     }
 
     //Firefox
-    .e-range::-moz-range-track,
-    .e-range::-moz-range-progress {
-    width: 100%;
-    height: $height;
-    background: $upper-background;
-    }
+    // .e-range::-moz-range-track,
+    // .e-range::-moz-range-progress {
+    // width: 100%;
+    // height: $height;
+    // background: $upper-background;
+    // }
 
-    .e-range::-moz-range-progress {
-    background: $lower-background;
-    }
+    // .e-range::-moz-range-progress {
+    // background: $lower-background;
+    // }
 
-    .e-range::-moz-range-thumb {
-        appearance: none;
-        margin: 0;
-        height: $thumb-height;
-        width: $thumb-height;
-        border-radius: $border-radius;
-        border: 0;
-    }
+    // .e-range::-moz-range-thumb {
+    //     appearance: none;
+    //     margin: 0;
+    //     height: $thumb-height;
+    //     width: $thumb-height;
+    //     border-radius: $border-radius;
+    //     border: 0;
+    // }
 }
 </style>
