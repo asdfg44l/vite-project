@@ -5,13 +5,15 @@
             {{ route.fullPath }}
         </a>
     </router-link>
-    <DiceRolling />
+    <!-- <DiceRolling /> -->
+    <RangeSliders />
 </template>
 
 <script>
-import DiceRolling from '../components/DiceRolling.vue'
+// import DiceRolling from '../components/DiceRolling.vue'
+import RangeSliders from '../components/RangeSliders.vue'
 export default {
-    components: { DiceRolling },
+    components: { RangeSliders },
     setup() {
         
     },
