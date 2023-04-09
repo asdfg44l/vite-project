@@ -63,6 +63,7 @@ export default {
     const multInput = ref("");
     const socketInput = ref("");
     const { state, dispatch } = useStore();
+    // console.log(state);
     const mulity = new mulityWorker();
 
     const onViewEntry = () => {

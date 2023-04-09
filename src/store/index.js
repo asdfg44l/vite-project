@@ -1,17 +1,11 @@
 import { createStore } from "vuex";
-
-//modules
-import apple from "./modules/apple";
-import banana from "./modules/banana";
+import modules from "./modulesLoader";
 
 const store = createStore({
   state: () => ({
     msg: "hello",
   }),
-  modules: {
-    apple,
-    banana,
-  },
+  modules,
 });
 
 export default store;

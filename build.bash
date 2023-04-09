@@ -1,7 +1,7 @@
 #!/bin/bash
 
 export BASE=$(cd $(dirname $0) && pwd -P)
-export APP_NAME=$(echo $BASE | sed 's/.*\/\(.*\)$/\1/')
+export APP_NAME=$(echo $BASE | grep -o '[^/]*$')
 export BUILD_ENV='dev'
 export MAJOR_VERSION=1.0
 export MINOR_VERSION=1000
@@ -27,7 +27,10 @@ export APP_VERSION="$APP_NAME-$BUILD_ENV-$MAJOR_VERSION.$MINOR_VERSION"
 
 if [ "$BUILD_ENV" == "production" ]; then
     sed -i '' -e "s/0.0.0/$APP_VERSION/g" $BASE/package.json
+    # sed -i '' -e "s/\(\"version\": \"\)[^\"]*\(\",\)/\1$APP_VERSION\2/g" $BASE/package.json
 fi
+
+sed -i '' -e "s/0.0.0/$APP_VERSION/g" $BASE/package.json
 
 rm -rf $BASE/dist
 
@@ -57,18 +60,18 @@ mv $BUNDLE_PATH $BASE/output/
 
 cd $BASE/output
 
-function csum {
-    $1 $2 >> $(echo $1 | tr '[:lower:]' '[:upper:]')
-}
+# function csum {
+#     $1 $2 >> $(echo $1 | tr '[:lower:]' '[:upper:]')
+# }
 
-if [ "$(uname)" == "Linux" ]
-then
-    for i in *; do
-        $i | tee >(csum md5sum  $i) >(csum sha256sum $i) >/dev/null
-    done
-else
-    for i in *; do
-        $i | tee >(csum md5 $i) >(csum shasum $i) >/dev/null
-    done
-fi
+# if [ "$(uname)" == "Linux" ]
+# then
+#     for i in *; do
+#         $i | tee >(csum md5sum  $i) >(csum sha256sum $i) >/dev/null
+#     done
+# else
+#     for i in *; do
+#         $i | tee >(csum md5 $i) >(csum shasum $i) >/dev/null
+#     done
+# fi
 
