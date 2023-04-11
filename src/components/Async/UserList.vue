@@ -4,7 +4,7 @@
 
 <script>
 import { ref } from "vue";
-import { useHttp } from "@/plugins/axios";
+// import { useHttp } from "@/plugins/axios";
 
 export default {
   async setup() {

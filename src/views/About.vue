@@ -43,8 +43,8 @@
 </template>
 
 <script>
-import { onMounted, ref, nextTick, onBeforeUnmount } from "vue";
-import { useStore } from "vuex";
+// import { onMounted, ref, nextTick, onBeforeUnmount } from "vue";
+// import { useStore } from "vuex";
 import mulityWorker from "@/plugins/web_worker/multiply.js?worker";
 import { createConnect } from "@/plugins/web_worker/websocket.js";
 // import { useWorker } from "@/plugins/web_worker";
@@ -52,18 +52,18 @@ import { createConnect } from "@/plugins/web_worker/websocket.js";
 // import { useFormat } from '@/plugins/format'
 
 //components
-import UserList from "@/components/Async/UserList.vue";
-import TSuspense from "@/components/TSuspense.vue";
-import TIcon from "@/components/TIcon.vue";
+// import UserList from "@/components/Async/UserList.vue";
+// import TSuspense from "@/components/TSuspense.vue";
+// import TIcon from "@/components/TIcon.vue";
 
 export default {
-  components: { UserList, TSuspense, TIcon },
+  // components: { UserList, TSuspense, TIcon },
   setup() {
     const iconAmount = ref(5);
     const multInput = ref("");
     const socketInput = ref("");
     const { state, dispatch } = useStore();
-    // console.log(state);
+    console.log(state);
     const mulity = new mulityWorker();
 
     const onViewEntry = () => {
