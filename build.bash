@@ -42,7 +42,7 @@ source ${HOME}/.bash_profile # for using nvm
 nvm use v16
 node -v
 
-npm install
+pnpm install
 npm run build
 
 if [ "$?" != "0" ]; then
