@@ -4,7 +4,7 @@
       class="form-control"
       name="email"
       type="email"
-      :rules="validateEmail"
+      rules="email"
     />
     <button class="btn btn-secondary btn-sm">submit</button>
     <ErrorMessage name="email" />
