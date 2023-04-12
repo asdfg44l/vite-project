@@ -1,6 +1,8 @@
+import path from "path";
+
 const routes = [
   {
-    name: "Home",
+    name: "home",
     path: "/",
     component: () => import("@/views/Home.vue"),
   },
@@ -8,6 +10,26 @@ const routes = [
     name: "about",
     path: "/about",
     component: () => import("@/views/About.vue"),
+  },
+  {
+    name: "webworker",
+    path: "/webworker",
+    component: () => import("@/views/WebWorker.vue"),
+  },
+  {
+    name: "suspense",
+    path: "/suspense",
+    component: () => import("@/views/Suspense.vue"),
+  },
+  {
+    name: "svgIcon",
+    path: "/svgIcon",
+    component: () => import("@/views/SvgIcon.vue"),
+  },
+  {
+    name: "intersectionObserver",
+    path: "/intersectionObserver",
+    component: () => import("@/views/IntersectionObserver.vue"),
   },
   {
     name: "playground",

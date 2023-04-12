@@ -10,5 +10,8 @@ export const createConnect = (url) => {
   ws.onerror = (e) => {
     console.error(e);
   };
+  ws.onclose = (e) => {
+    console.log(e);
+  };
   return ws;
 };

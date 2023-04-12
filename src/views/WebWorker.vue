@@ -1,0 +1,76 @@
+<template>
+  <!-- mulity worker -->
+  <div>
+    <p class="mb-3">Mulity Worker</p>
+    <div>
+      <label class="mr-1" for="mult">Worker:</label>
+      <input
+        class="form-control"
+        @keypress.enter="mulitySendMge"
+        type="text"
+        v-model="multInput"
+        name="mult"
+        id="mult"
+      />
+      <button class="btn btn-secondary btn-sm ml-2" @click="mulitySendMge">
+        send
+      </button>
+    </div>
+    <div class="mt-1">
+      <p>
+        Output: <br />
+        <span class="ml-4">{{ multOutput }}</span>
+      </p>
+    </div>
+  </div>
+  <!-- websocket worker -->
+  <div class="mt-4">
+    <label class="mr-1" for="socket">WebSocket:</label>
+    <input
+      class="form-control"
+      @keypress.enter="socketSendMsg"
+      type="text"
+      v-model="socketInput"
+      name="socket"
+      id="socket"
+    />
+    <button class="btn btn-secondary btn-sm ml-2" @click="socketSendMsg">
+      send
+    </button>
+  </div>
+</template>
+
+<script>
+import mulityWorker from "@/plugins/web_worker/multiply.js?worker";
+import { createConnect } from "@/plugins/web_worker/websocket.js";
+
+const socketKey =
+  "wss://demo.piesocket.com/v3/channel_123?api_key=VCXCEuvhGcBDP7XhiJJUDvR1e1D3eiVjgZ9VRiaV";
+export default {
+  setup() {
+    //mulity
+    const multInput = ref("");
+    const multOutput = ref("");
+    const mulity = new mulityWorker();
+    const mulitySendMge = () => mulity.postMessage(multInput.value);
+    mulity.onmessage = (e) => (multOutput.value = e.data);
+
+    //websocket
+    const socketInput = ref("");
+    const ws = createConnect(socketKey);
+    const socketSendMsg = () => ws.send(socketInput.value);
+
+    onUnmounted(() => {
+      ws.close();
+    });
+
+    return {
+      multInput,
+      multOutput,
+      mulitySendMge,
+      socketInput,
+      socketSendMsg,
+    };
+  },
+};
+</script>
