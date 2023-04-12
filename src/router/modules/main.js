@@ -7,11 +7,6 @@ const routes = [
     component: () => import("@/views/Home.vue"),
   },
   {
-    name: "about",
-    path: "/about",
-    component: () => import("@/views/About.vue"),
-  },
-  {
     name: "webworker",
     path: "/webworker",
     component: () => import("@/views/WebWorker.vue"),
@@ -30,6 +25,11 @@ const routes = [
     name: "intersectionObserver",
     path: "/intersectionObserver",
     component: () => import("@/views/IntersectionObserver.vue"),
+  },
+  {
+    name: "veevalidate",
+    path: "/veevalidate",
+    component: () => import("@/views/VeeValidate.vue"),
   },
   {
     name: "playground",

@@ -20,6 +20,7 @@
 export default {
   setup() {
     const routerList = [
+      "veevalidate",
       "suspense",
       "svgIcon",
       "intersectionObserver",

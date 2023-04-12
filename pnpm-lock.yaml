@@ -9,6 +9,7 @@ specifiers:
   sass: ^1.53.0
   unplugin-auto-import: ^0.15.2
   unplugin-vue-components: ^0.24.1
+  vee-validate: ^4.8.4
   vite: ^2.9.9
   vite-plugin-svg-icons: ^2.0.1
   vite-plugin-windicss: ^1.8.7
@@ -23,6 +24,7 @@ dependencies:
   lodash: 4.17.21
   unplugin-auto-import: 0.15.2
   unplugin-vue-components: 0.24.1_vue@3.2.47
+  vee-validate: 4.8.4_vue@3.2.47
   vue: 3.2.47
   vue-router: 4.1.6_vue@3.2.47
   vue-tsc: 1.2.0
@@ -3562,6 +3564,15 @@ packages:
     resolution: {integrity: sha512-BNGbWLfd0eUPabhkXUVm0j8uuvREyTh5ovRa/dyow/BqAbZJyC+5fU+IzQOzmAKzYqYRAISoRhdQr3eIZ/PXqg==}
     engines: {node: '>= 0.8'}
     dev: true
+
+  /vee-validate/4.8.4_vue@3.2.47:
+    resolution: {integrity: sha512-wlLBy50t4EMEin5oqxS2mxpqW02TkIsk0H3LcivLztNJKKLW17hpPSQtQnn8wjDLoWWZ/CVOfep6aw77aCAavg==}
+    peerDependencies:
+      vue: ^3.0.0
+    dependencies:
+      '@vue/devtools-api': 6.5.0
+      vue: 3.2.47
+    dev: false
 
   /vite-plugin-svg-icons/2.0.1_vite@2.9.15:
     resolution: {integrity: sha512-6ktD+DhV6Rz3VtedYvBKKVA2eXF+sAQVaKkKLDSqGUfnhqXl3bj5PPkVTl3VexfTuZy66PmINi8Q6eFnVfRUmA==}
