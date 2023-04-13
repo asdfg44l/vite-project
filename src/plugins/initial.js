@@ -2,14 +2,10 @@ import router from "@/router";
 import store from "@/store";
 import { VueAxios } from "./axios";
 import { formatPlugin } from "./format";
-import { IntersectionObserver } from "./IntersectionObserver";
-
-import { defineRule } from 'vee-validate';
-import AllRules from '@vee-validate/rules';
-
+import { IntersectionObserver } from "./Vdirectives/IntersectionObserver";
+import initVeeValidateRules from "./VeeValidate";
 
 export const APP_INITIAL = (app) => {
-  
   // import.meta.globEager("@/assets/*.svg")
   app.use(router);
   app.use(store);
@@ -17,11 +13,7 @@ export const APP_INITIAL = (app) => {
   app.use(formatPlugin);
   app.directive("insectOb", IntersectionObserver);
   app.config.globalProperties.console = console;
-
-  //vee-validate rules
-  Object.keys(AllRules).forEach(rule => {
-    defineRule(rule, AllRules[rule]);
-  });
+  initVeeValidateRules();
 
   return app;
 };
