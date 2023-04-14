@@ -5,13 +5,13 @@
 </template>
 
 <script>
-import { toRefs, computed } from "vue";
+import { computed, toRefs } from 'vue'
 
 export default {
   props: {
     prefix: {
       type: String,
-      default: "trevi",
+      default: 'trevi',
     },
     name: {
       type: String,
@@ -19,16 +19,16 @@ export default {
     },
   },
   setup(props) {
-    const { prefix, name } = toRefs(props);
+    const { prefix, name } = toRefs(props)
     // console.log(props);
-    const symbolId = computed(() => `#${prefix.value}-${name.value}`);
+    const symbolId = computed(() => `#${prefix.value}-${name.value}`)
     // const symbolId = computed(() => "t-card_club");
 
     return {
       symbolId,
-    };
+    }
   },
-};
+}
 </script>
 
 <style scoped>

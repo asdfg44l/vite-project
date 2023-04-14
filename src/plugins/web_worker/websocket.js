@@ -1,17 +1,17 @@
-export const createConnect = (url) => {
-  let ws = new WebSocket(url);
+export function createConnect(url) {
+  const ws = new WebSocket(url)
 
   ws.onopen = (e) => {
-    console.log("open", e);
-  };
+    console.log('open', e)
+  }
   ws.onmessage = (e) => {
-    console.log(e.data);
-  };
+    console.log(e.data)
+  }
   ws.onerror = (e) => {
-    console.error(e);
-  };
+    console.error(e)
+  }
   ws.onclose = (e) => {
-    console.log(e);
-  };
-  return ws;
-};
+    console.log(e)
+  }
+  return ws
+}

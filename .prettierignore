@@ -1,0 +1,15 @@
+/dist/*
+.local
+/node_modules/**
+
+**/*.svg
+**/*.sh
+
+/public/*
+
+pnpm-lock.yaml
+auto-imports.d.ts
+components.d.ts
+.prettierignore
+.eslintignore
+.husky/pre-commit

@@ -8,26 +8,26 @@
 </template>
 
 <script>
-import { toRefs } from "vue";
+import { toRefs } from 'vue'
 
 export default {
   props: {
     pending: {
       type: Function,
-      default: () => console.log("pending"),
+      default: () => console.log('pending'),
     },
     resolve: {
       type: Function,
-      default: () => console.log("resolve"),
+      default: () => console.log('resolve'),
     },
   },
   setup(props) {
-    const { pending, resolve } = toRefs(props);
+    const { pending, resolve } = toRefs(props)
 
     return {
       pending,
       resolve,
-    };
+    }
   },
-};
+}
 </script>

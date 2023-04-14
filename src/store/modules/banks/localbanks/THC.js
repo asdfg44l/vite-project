@@ -1,6 +1,6 @@
 export default {
-    namespaced: true,
-    state: () => ({
-        name: 'THC'
-    })
+  namespaced: true,
+  state: () => ({
+    name: 'THC',
+  }),
 }

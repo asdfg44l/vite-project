@@ -1,17 +1,19 @@
-import { inject } from "vue";
-import { commonTime } from "./date";
+import { inject } from 'vue'
+import { commonTime } from './date'
 
 const injectionKey = Symbol('formatPlugin')
 
 const format = {
-  commonTime
+  commonTime,
 }
 
-export const useFormat = () => inject(injectionKey)
+export function useFormat() {
+  return inject(injectionKey)
+}
 
 export const formatPlugin = {
-    install: (app, options) => {
-        app.config.globalProperties.$format = format
-        app.provide(injectionKey, format)
-    }
+  install: (app, options) => {
+    app.config.globalProperties.$format = format
+    app.provide(injectionKey, format)
+  },
 }

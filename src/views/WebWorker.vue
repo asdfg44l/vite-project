@@ -5,12 +5,12 @@
     <div>
       <label class="mr-1" for="mult">Worker:</label>
       <input
-        class="form-control"
-        @keypress.enter="mulitySendMge"
-        type="text"
-        v-model="multInput"
-        name="mult"
         id="mult"
+        v-model="multInput"
+        class="form-control"
+        type="text"
+        name="mult"
+        @keypress.enter="mulitySendMge"
       />
       <button class="btn btn-secondary btn-sm ml-2" @click="mulitySendMge">
         send
@@ -27,12 +27,12 @@
   <div class="mt-4">
     <label class="mr-1" for="socket">WebSocket:</label>
     <input
-      class="form-control"
-      @keypress.enter="socketSendMsg"
-      type="text"
-      v-model="socketInput"
-      name="socket"
       id="socket"
+      v-model="socketInput"
+      class="form-control"
+      type="text"
+      name="socket"
+      @keypress.enter="socketSendMsg"
     />
     <button class="btn btn-secondary btn-sm ml-2" @click="socketSendMsg">
       send
@@ -41,28 +41,28 @@
 </template>
 
 <script>
-import mulityWorker from "@/plugins/web_worker/multiply.js?worker";
-import { createConnect } from "@/plugins/web_worker/websocket.js";
+import MulityWorker from '@/plugins/web_worker/multiply.js?worker'
+import { createConnect } from '@/plugins/web_worker/websocket.js'
 
 const socketKey =
-  "wss://demo.piesocket.com/v3/channel_123?api_key=VCXCEuvhGcBDP7XhiJJUDvR1e1D3eiVjgZ9VRiaV";
+  'wss://demo.piesocket.com/v3/channel_123?api_key=VCXCEuvhGcBDP7XhiJJUDvR1e1D3eiVjgZ9VRiaV'
 export default {
   setup() {
-    //mulity
-    const multInput = ref("");
-    const multOutput = ref("");
-    const mulity = new mulityWorker();
-    const mulitySendMge = () => mulity.postMessage(multInput.value);
-    mulity.onmessage = (e) => (multOutput.value = e.data);
+    // mulity
+    const multInput = ref('')
+    const multOutput = ref('')
+    const mulity = new MulityWorker()
+    const mulitySendMge = () => mulity.postMessage(multInput.value)
+    mulity.onmessage = (e) => (multOutput.value = e.data)
 
-    //websocket
-    const socketInput = ref("");
-    const ws = createConnect(socketKey);
-    const socketSendMsg = () => ws.send(socketInput.value);
+    // websocket
+    const socketInput = ref('')
+    const ws = createConnect(socketKey)
+    const socketSendMsg = () => ws.send(socketInput.value)
 
     onUnmounted(() => {
-      ws.close();
-    });
+      ws.close()
+    })
 
     return {
       multInput,
@@ -70,7 +70,7 @@ export default {
       mulitySendMge,
       socketInput,
       socketSendMsg,
-    };
+    }
   },
-};
+}
 </script>

@@ -1,6 +1,6 @@
 export default {
-    namespaced: true,
-    state: () => ({
-        name: 'HSBC'
-    })
+  namespaced: true,
+  state: () => ({
+    name: 'HSBC',
+  }),
 }

@@ -1,3 +1,3 @@
 self.onmessage = (e) => {
-  self.postMessage("multiply get message: " + e.data);
-};
+  self.postMessage(`multiply get message: ${e.data}`)
+}

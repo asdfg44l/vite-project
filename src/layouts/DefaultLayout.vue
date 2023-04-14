@@ -3,7 +3,7 @@
     <h3 class="mb-2">[Layout] default version: {{ VERSION }}</h3>
     <div class="flex gap-4">
       <template v-for="router in routerList" :key="router">
-        <router-link :to="router" custom v-slot="{ href, route, navigate }">
+        <router-link v-slot="{ href, route, navigate }" :to="router" custom>
           <a class="btn btn-primary capitalize" :href="href" @click="navigate">
             {{ route.name }}
           </a>
@@ -20,17 +20,17 @@
 export default {
   setup() {
     const routerList = [
-      "veevalidate",
-      "suspense",
-      "svgIcon",
-      "intersectionObserver",
-      "webworker",
-      "playground",
-    ];
+      'veevalidate',
+      'suspense',
+      'svgIcon',
+      'intersectionObserver',
+      'webworker',
+      'playground',
+    ]
     return {
       VERSION: __APP_VERSION__,
       routerList,
-    };
+    }
   },
-};
+}
 </script>

@@ -1,60 +1,59 @@
-import { defineConfig } from "windicss/helpers";
+import { defineConfig } from 'windicss/helpers'
 
-import plugin from "windicss/plugin";
-import colors from "windicss/colors";
-import defaultTheme from "windicss/defaultTheme";
+import plugin from 'windicss/plugin'
+import colors from 'windicss/colors'
 
 export default defineConfig({
-  darkMode: "class",
+  darkMode: 'class',
   theme: {
     extend: {
       screens: {
-        table: "765px",
+        table: '765px',
       },
     },
   },
   shortcuts: {
-    "form-control": "border rounded border-gray-500",
+    'form-control': 'border rounded border-gray-500',
   },
   plugins: [
     plugin(({ addComponents }) => {
       const buttons = {
-        ".btn": {
-          padding: ".5rem 1rem",
-          borderRadius: "10px",
-          "&-primary": {
+        '.btn': {
+          padding: '.5rem 1rem',
+          borderRadius: '10px',
+          '&-primary': {
             color: colors.gray[100],
             backgroundColor: colors.emerald[500],
           },
-          "&-secondary": {
+          '&-secondary': {
             color: colors.white,
             backgroundColor: colors.gray[600],
           },
         },
-        ".btn-sm": {
-          padding: ".25rem .75rem",
+        '.btn-sm': {
+          padding: '.25rem .75rem',
         },
         // '.btn--primary': {
         //     backgroundColor: colors.emerald[500]
         // }
-      };
+      }
 
-      addComponents(buttons);
+      addComponents(buttons)
     }),
     plugin(({ addDynamic, variants }) => {
-      addDynamic("skew-y", ({ Utility, Style }) => {
+      addDynamic('skew-y', ({ Utility, Style }) => {
         return Utility.handler
-          .handleStatic(Style("skew-y"))
-          .handleNumber(0, 300, "int", (number) => `skewY(-${number}deg)`)
-          .createProperty("transform");
-      });
+          .handleStatic(Style('skew-y'))
+          .handleNumber(0, 300, 'int', (number) => `skewY(-${number}deg)`)
+          .createProperty('transform')
+      })
     }),
     plugin(({ addVariant }) => {
-      addVariant("hocus", ({ modifySelectors }) => {
+      addVariant('hocus', ({ modifySelectors }) => {
         return modifySelectors(({ className }) => {
-          return `.${className}:hover:focus`;
-        });
-      });
+          return `.${className}:hover:focus`
+        })
+      })
     }),
   ],
-});
+})

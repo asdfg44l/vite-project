@@ -1,7 +1,7 @@
 const rules = {
   validateEmail(values) {
-    return !!values;
+    return !!values
   },
-};
+}
 
-export default rules;
+export default rules

@@ -1,11 +1,11 @@
-import { createStore } from "vuex";
-import modules from "./modulesLoader";
+import { createStore } from 'vuex'
+import modules from './modulesLoader'
 
 const store = createStore({
   state: () => ({
-    msg: "hello",
+    msg: 'hello',
   }),
   modules,
-});
+})
 
-export default store;
+export default store

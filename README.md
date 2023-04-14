@@ -29,13 +29,15 @@
 ### 資源自動引入
 
 - [unplugin-auto-import](github.com/antfu/unplugin-auto-import#readme)
+- [unplugin-vue-components](https://github.com/antfu/unplugin-vue-components)
 - [vite-plugin-svg-icons](https://github.com/anncwb/vite-plugin-svg-icons/tree/master/#readme)
 
-### 文字、數字及時間格式化
+### 表單驗證, 文字、數字及時間格式化
 
 - [vueI18n](https://github.com/intlify/vue-i18n-next/tree/master/packages/vue-i18n#readme)
 - [bigNumber.js](https://github.com/MikeMcl/bignumber.js#readme)
 - [day.js](day.js.org)
+- [Vee-Validate] _form validate_
 
 ### SCSS
 
@@ -47,6 +49,28 @@
 ### 補丁
 
 - [@type/node](https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/node)
+
+## 自定義擴充功能
+
+放置了一些常用的功能像是 layout 或是 svgIcon，以避免重複開發功能．
+
+### Components
+
+| 名稱      | 功能描述                                                              |
+| --------- | --------------------------------------------------------------------- |
+| TIcon     | 使用自動引入的 svg icon                                               |
+| TSuspense | 封裝原生 Suspense，並可傳入 resolve, pending 兩個 props 作為 callback |
+
+### Function
+
+- Page Layout: 可以透過設定 router 的 meta.layoutName 來決定該頁面的 layout．
+- store/modulesLoader: 自動根據資料夾生成對應的 store modules 結構
+- router/modulesLoader: 自動引用並生成 router List
+
+## Pre-commit
+
+- [Prettier + ESlint](https://juejin.cn/post/7142815651294511135)
+- [@antfu/eslint-config](https://github.com/antfu/eslint-config)
 
 ## Recommended IDE Setup
 

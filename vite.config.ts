@@ -1,11 +1,12 @@
+import path from 'node:path'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
-import path from 'path'
+
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 
-//plugins
+// plugins
 import WindiCSS from 'vite-plugin-windicss'
 
 // https://vitejs.dev/config/
@@ -19,27 +20,26 @@ export default defineConfig({
         'vue-router',
         'vuex',
         {
-          ['@/plugins/axios']: [
-            'useHttp'
-          ]
-        }
-      ]
+          '@/plugins/axios': ['useHttp'],
+        },
+      ],
     }),
     Components(),
     createSvgIconsPlugin({
-      iconDirs: [path.resolve(process.cwd(), "src/assets")],
-      symbolId: "trevi-[name]"
-    })
+      iconDirs: [path.resolve(process.cwd(), 'src/assets')],
+      symbolId: 'trevi-[name]',
+    }),
   ],
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, './src')
-    }
+      '@': path.resolve(__dirname, './src'),
+    },
   },
   define: {
-    '__APP_VERSION__': JSON.stringify(process.env.npm_package_version),
-    '__VUE_I18N_FULL_INSTALL__': true,
-    '__VUE_I18N_LEGACY_API__': true,
-    '__INTLIFY_PROD_DEVTOOLS__': false,
-  }
+    __APP_VERSION__: JSON.stringify(process.env.npm_package_version),
+    // Variable for VueI18n
+    __VUE_I18N_FULL_INSTALL__: true,
+    __VUE_I18N_LEGACY_API__: true,
+    __INTLIFY_PROD_DEVTOOLS__: false,
+  },
 })

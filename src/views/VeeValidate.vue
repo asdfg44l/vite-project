@@ -2,14 +2,14 @@
   <!-- field components -->
   <Form rules="email">
     <label class="mr-2 inline-block w-[55px]" for="email1">Email1:</label>
-    <Field class="form-control" id="email1" name="email1" />
+    <Field id="email1" class="form-control" name="email1" />
     <ErrorMessage name="email1" />
   </Form>
   <!-- field with custom input -->
   <Form @submit="onSubmit">
-    <Field name="email2" rules="email" v-slot="{ field, errorMessage }">
+    <Field v-slot="{ field, errorMessage }" name="email2" rules="email">
       <label class="mr-2 inline-block w-[55px]" for="email2">Email2:</label>
-      <input class="form-control" v-bind="field" type="email" id="email2" />
+      <input v-bind="field" id="email2" class="form-control" type="email" />
       <button class="btn btn-secondary btn-sm">submit</button>
       <p>{{ errorMessage }}</p>
     </Field>
@@ -18,27 +18,27 @@
 
   <!-- validate-schema -->
   <p class="mb-3">Validate Schema</p>
-  <Form :validation-schema="schema" v-slot="{ errors }">
+  <Form v-slot="{ errors }" :validation-schema="schema">
     <!-- email3 -->
     <div class="mb-2">
       <label class="mr-2 inline-block w-[55px]" for="email3">Email3:</label>
-      <Field class="form-control" id="email3" name="email3" />
+      <Field id="email3" class="form-control" name="email3" />
       <ErrorMessage name="email3" />
     </div>
     <!-- user -->
     <div class="mb-2">
       <label class="mr-2 inline-block w-[55px]" for="user">User:</label>
-      <Field class="form-control" name="user" id="user" />
+      <Field id="user" class="form-control" name="user" />
       <ErrorMessage name="user" />
     </div>
     <!-- password -->
     <div class="mb-2">
       <label class="mr-2 inline-block w-[70px]" for="password">Password:</label>
       <Field
+        id="password"
         class="form-control"
         type="password"
         name="password"
-        id="password"
       />
       <ErrorMessage name="password" />
     </div>
@@ -48,21 +48,21 @@
         >ConfirmPassword:</label
       >
       <Field
+        id="confirmPassword"
         class="form-control"
         type="password"
         name="confirmPassword"
-        id="confirmPassword"
       />
       <ErrorMessage name="confirmPassword" />
     </div>
     <!-- <p>{{ errors }}</p> -->
-    <p>{{ $t("hello") }}</p>
+    <p>{{ $t('hello') }}</p>
   </Form>
 </template>
 
 <script>
-import { Form, Field, ErrorMessage } from "vee-validate";
-import { useI18n } from "vue-i18n";
+import { ErrorMessage, Field, Form } from 'vee-validate'
+import { useI18n } from 'vue-i18n'
 
 export default {
   components: {
@@ -71,21 +71,21 @@ export default {
     ErrorMessage,
   },
   setup() {
-    const onSubmit = (values) => console.log(values);
+    const onSubmit = (values) => console.log(values)
     const schema = {
-      email3: "required|email",
-      user: "required|min:3|max:6",
-      password: "required",
-      confirmPassword: "required|confirmed:@password",
-    };
+      email3: 'required|email',
+      user: 'required|min:3|max:6',
+      password: 'required',
+      confirmPassword: 'required|confirmed:@password',
+    }
 
-    const $i18n = useI18n();
-    $i18n.locale.value = "en-us";
+    const $i18n = useI18n()
+    $i18n.locale.value = 'en-us'
 
     return {
       onSubmit,
       schema,
-    };
+    }
   },
-};
+}
 </script>
