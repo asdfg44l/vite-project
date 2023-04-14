@@ -56,11 +56,13 @@
       <ErrorMessage name="confirmPassword" />
     </div>
     <!-- <p>{{ errors }}</p> -->
+    <p>{{ $t("hello") }}</p>
   </Form>
 </template>
 
 <script>
 import { Form, Field, ErrorMessage } from "vee-validate";
+import { useI18n } from "vue-i18n";
 
 export default {
   components: {
@@ -76,6 +78,10 @@ export default {
       password: "required",
       confirmPassword: "required|confirmed:@password",
     };
+
+    const $i18n = useI18n();
+    $i18n.locale.value = "en-us";
+
     return {
       onSubmit,
       schema,
