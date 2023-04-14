@@ -1,0 +1,9 @@
+{
+  "hello": "hello Member",
+  "fields": {
+    "required": "Value is required",
+    "emailx": {
+      "required": "Email is required xxx"
+    }
+  }
+}

@@ -1,8 +1,12 @@
 import { createI18n } from 'vue-i18n'
-import enUS from './locales/en-us.json'
-import zhTW from './locales/zh-tw.json'
+import global from '@/I18n/locales/_global.json'
+import enUS from '@/I18n/locales/en-us.json'
+import zhTW from '@/I18n/locales/zh-tw.json'
 
-type MessageSchema = typeof enUS
+const en_us = { ...global, ...enUS }
+const zh_tw = { ...global, ...zhTW }
+
+type MessageSchema = typeof en_us
 type LanguageList = 'en-us' | 'zh-tw'
 
 function getUserLocales() {
@@ -18,15 +22,13 @@ function getUserLocales() {
   return locales
 }
 
-console.log(getUserLocales())
-
 const i18n = createI18n<[MessageSchema], LanguageList>({
   legacy: false,
-  locale: 'zh-tw',
+  locale: getUserLocales(),
   fallbackLocale: 'zh-tw',
   messages: {
-    'en-us': enUS,
-    'zh-tw': zhTW,
+    'en-us': en_us,
+    'zh-tw': zh_tw,
   },
 })
 

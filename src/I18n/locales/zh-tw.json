@@ -1,0 +1,9 @@
+{
+  "hello": "你好啊",
+  "fields": {
+    "required": "請輸入值",
+    "emailx": {
+      "required": "給我輸入值啊！！！"
+    }
+  }
+}

@@ -55,7 +55,7 @@
       />
       <ErrorMessage name="confirmPassword" />
     </div>
-    <!-- <p>{{ errors }}</p> -->
+    <p>{{ errors }}</p>
     <p>{{ $t('hello') }}</p>
   </Form>
 </template>
