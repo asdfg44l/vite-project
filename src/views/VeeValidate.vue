@@ -6,19 +6,32 @@
     <ErrorMessage name="email1" />
   </Form>
   <!-- field with custom input -->
-  <Form @submit="onSubmit">
-    <Field v-slot="{ field, errorMessage }" name="email2" rules="email">
-      <label class="mr-2 inline-block w-[55px]" for="email2">Email2:</label>
-      <input v-bind="field" id="email2" class="form-control" type="email" />
-      <button class="btn btn-secondary btn-sm">submit</button>
-      <p>{{ errorMessage }}</p>
+  <Form v-slot="{ resetForm }" @submit="onSubmit">
+    <Field
+      v-slot="{ handleReset, resetField, ...other }"
+      name="email2"
+      rules="required|email"
+    >
+      <TInput
+        v-bind="other"
+        v-model="unComposedEmail"
+        :handle-reset="handleReset"
+        :reset-field="resetField"
+      />
     </Field>
+    <!-- <p>{{ unComposedEmail }}</p> -->
+    <TInputComposed
+      v-model="composedEmail"
+      name="emailx"
+      rules="required|email"
+    />
+    <!-- <p>{{ composedEmail }}</p> -->
   </Form>
   <hr class="my-3" />
 
   <!-- validate-schema -->
   <p class="mb-3">Validate Schema</p>
-  <Form v-slot="{ errors }" :validation-schema="schema">
+  <Form v-slot="{ errors, resetForm, meta }" :validation-schema="schema">
     <!-- email3 -->
     <div class="mb-2">
       <label class="mr-2 inline-block w-[55px]" for="email3">Email3:</label>
@@ -43,7 +56,7 @@
       <ErrorMessage name="password" />
     </div>
     <!-- confirmPassword -->
-    <div>
+    <div class="mb-2">
       <label class="mr-2 inline-block" for="confirmPassword"
         >ConfirmPassword:</label
       >
@@ -55,8 +68,23 @@
       />
       <ErrorMessage name="confirmPassword" />
     </div>
+    <!-- custom errorMessage -->
+    <div>
+      <label for="_custom_field_name">customName: </label>
+      <Field
+        id="_custom_field_name"
+        name="_custom_field_name"
+        label="nice"
+        class="form-control"
+      ></Field>
+      <ErrorMessage name="_custom_field_name" />
+    </div>
+
     <p>{{ errors }}</p>
     <p>{{ $t('hello') }}</p>
+    <button class="btn btn-sm btn-secondary" @click="resetForm()">
+      ResetForm
+    </button>
   </Form>
 </template>
 
@@ -71,12 +99,16 @@ export default {
     ErrorMessage,
   },
   setup() {
+    const unComposedEmail = ref(null)
+    const composedEmail = ref(null)
+
     const onSubmit = (values) => console.log(values)
     const schema = {
       email3: 'required|email',
       user: 'required|min:3|max:6',
       password: 'required',
       confirmPassword: 'required|confirmed:@password',
+      _custom_field_name: 'required',
     }
 
     const $i18n = useI18n()
@@ -85,6 +117,8 @@ export default {
     return {
       onSubmit,
       schema,
+      composedEmail,
+      unComposedEmail,
     }
   },
 }

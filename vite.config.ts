@@ -19,6 +19,7 @@ export default defineConfig({
         'vue',
         'vue-router',
         'vuex',
+        'vee-validate',
         {
           '@/plugins/axios': ['useHttp'],
         },

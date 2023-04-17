@@ -19,6 +19,8 @@ declare module '@vue/runtime-core' {
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     TIcon: typeof import('./src/components/TIcon.vue')['default']
+    TInput: typeof import('./src/components/TInput.vue')['default']
+    TInputComposed: typeof import('./src/components/TInputComposed.vue')['default']
     TSuspense: typeof import('./src/components/TSuspense.vue')['default']
     UserList: typeof import('./src/components/Async/UserList.vue')['default']
   }
