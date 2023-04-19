@@ -21,9 +21,13 @@
     </Field>
     <!-- <p>{{ unComposedEmail }}</p> -->
     <TInputComposed
+      id="emailx"
       v-model="composedEmail"
+      title="Email:"
       name="emailx"
       rules="required|email"
+      type="text"
+      input-class="px-4 py-1"
     />
     <!-- <p>{{ composedEmail }}</p> -->
   </Form>

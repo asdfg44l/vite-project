@@ -10,13 +10,7 @@ export {}
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     DialogGroup: typeof import('./src/components/Modal/DialogGroup.vue')['default']
-    DialogsGroups: typeof import('./src/components/Modal/dialogsGroups.vue')['default']
-    DiceRolling: typeof import('./src/components/DiceRolling.vue')['default']
-    FlipPoker: typeof import('./src/components/FlipPoker.vue')['default']
     Greeting: typeof import('./src/components/Greeting.vue')['default']
-    HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
-    PokerTypeList: typeof import('./src/components/PokerTypeList.vue')['default']
-    RangeSliders: typeof import('./src/components/RangeSliders.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     TestModal: typeof import('./src/components/Modal/TestModal.vue')['default']
@@ -24,6 +18,7 @@ declare module '@vue/runtime-core' {
     TInput: typeof import('./src/components/TInput.vue')['default']
     TInputComposed: typeof import('./src/components/TInputComposed.vue')['default']
     TSuspense: typeof import('./src/components/TSuspense.vue')['default']
+    UserForm: typeof import('./src/components/Form/UserForm.vue')['default']
     UserList: typeof import('./src/components/Async/UserList.vue')['default']
   }
 }

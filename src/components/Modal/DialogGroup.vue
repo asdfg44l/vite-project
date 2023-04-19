@@ -8,7 +8,7 @@ export default {
     const { state } = useStore()
 
     return {
-      TestModalId: state.dialogs.TestModal,
+      TestModalId: state.dialogs.TestModal.key,
     }
   },
 }
