@@ -1,3 +1,4 @@
+import { createVfm } from 'vue-final-modal'
 import { VueAxios } from './axios'
 import { formatPlugin } from './format'
 import { IntersectionObserver } from './Vdirectives/IntersectionObserver'
@@ -12,6 +13,7 @@ export function APP_INITIAL(app) {
   app.use(router)
   app.use(store)
   app.use(VueAxios)
+  app.use(createVfm())
   app.use(formatPlugin)
   app.directive('insectOb', IntersectionObserver)
   app.config.globalProperties.console = console

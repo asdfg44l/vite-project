@@ -29,6 +29,10 @@ export default defineConfig({
             color: colors.white,
             backgroundColor: colors.gray[600],
           },
+          '&-confirm': {
+            color: colors.white,
+            backgroundColor: colors.blueGray[500],
+          },
         },
         '.btn-sm': {
           padding: '.25rem .75rem',

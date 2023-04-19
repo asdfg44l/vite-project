@@ -35,6 +35,7 @@ export default {
   setup() {
     const routerList = [
       'veevalidate',
+      'vuefinalmodal',
       'suspense',
       'svgIcon',
       'intersectionObserver',

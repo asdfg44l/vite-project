@@ -30,6 +30,11 @@ const routes = [
     component: () => import('@/views/VeeValidate.vue'),
   },
   {
+    name: 'vuefinalmodal',
+    path: '/vuefinalmodal',
+    component: () => import('@/views/VueModal.vue'),
+  },
+  {
     name: 'playground',
     path: '/playground/:name(hello|hi)?',
     component: () => import('@/views/Playground.vue'),

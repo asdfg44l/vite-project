@@ -10,6 +10,8 @@ export {}
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     CatchProps: typeof import('./src/components/CatchProps.vue')['default']
+    DialogGroup: typeof import('./src/components/Modal/DialogGroup.vue')['default']
+    DialogsGroups: typeof import('./src/components/Modal/dialogsGroups.vue')['default']
     DiceRolling: typeof import('./src/components/DiceRolling.vue')['default']
     FlipPoker: typeof import('./src/components/FlipPoker.vue')['default']
     Greeting: typeof import('./src/components/Greeting.vue')['default']
@@ -18,6 +20,7 @@ declare module '@vue/runtime-core' {
     RangeSliders: typeof import('./src/components/RangeSliders.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    TestModal: typeof import('./src/components/Modal/TestModal.vue')['default']
     TIcon: typeof import('./src/components/TIcon.vue')['default']
     TInput: typeof import('./src/components/TInput.vue')['default']
     TInputComposed: typeof import('./src/components/TInputComposed.vue')['default']
