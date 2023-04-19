@@ -9,7 +9,6 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
-    CatchProps: typeof import('./src/components/CatchProps.vue')['default']
     DialogGroup: typeof import('./src/components/Modal/DialogGroup.vue')['default']
     DialogsGroups: typeof import('./src/components/Modal/dialogsGroups.vue')['default']
     DiceRolling: typeof import('./src/components/DiceRolling.vue')['default']
