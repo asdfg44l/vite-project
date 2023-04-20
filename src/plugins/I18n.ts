@@ -1,7 +1,7 @@
 import { createI18n } from 'vue-i18n'
-import global from '@/I18n/locales/_global.json'
-import enUS from '@/I18n/locales/en-us.json'
-import zhTW from '@/I18n/locales/zh-tw.json'
+import global from '@/locales/_global.json'
+import enUS from '@/locales/en-us.json'
+import zhTW from '@/locales/zh-tw.json'
 
 const en_us = { ...global, ...enUS }
 const zh_tw = { ...global, ...zhTW }

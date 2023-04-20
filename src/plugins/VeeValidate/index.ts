@@ -2,7 +2,7 @@ import { configure, defineRule } from 'vee-validate'
 import NativeRules from '@vee-validate/rules'
 import CustomRules from './_rules'
 
-import i18n from '@/I18n'
+import i18n from '@/plugins/I18n'
 
 // 自定義 VeeValidate wording
 // 擴展規則: 在 wording中以 fields > name > rules這三個順序做分層

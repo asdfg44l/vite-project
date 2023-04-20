@@ -41,8 +41,8 @@
 </template>
 
 <script>
-import MulityWorker from '@/plugins/web_worker/multiply.js?worker'
-import { createConnect } from '@/plugins/web_worker/websocket.js'
+import MulityWorker from '@/plugins/Web_worker/multiply.js?worker'
+import { createConnect } from '@/plugins/Web_worker/websocket.js'
 
 const socketKey =
   'wss://demo.piesocket.com/v3/channel_123?api_key=VCXCEuvhGcBDP7XhiJJUDvR1e1D3eiVjgZ9VRiaV'

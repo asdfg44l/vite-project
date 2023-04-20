@@ -7,7 +7,7 @@
 
 <script lang="ts">
 import Layout from '@/layouts/Layout.vue'
-import { useTs } from '@/composition/test'
+import { useTs } from '@/utils/test'
 
 export default {
   components: { Layout },

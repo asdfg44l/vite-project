@@ -1,9 +1,9 @@
 import { createVfm } from 'vue-final-modal'
 import { VueAxios } from './axios'
-import { formatPlugin } from './format'
+import { formatPlugin } from './Format'
 import { IntersectionObserver } from './Vdirectives/IntersectionObserver'
 import initVeeValidateRules from './VeeValidate'
-import i18n from '@/I18n'
+import i18n from '@/plugins/I18n'
 import store from '@/store'
 import router from '@/router'
 
