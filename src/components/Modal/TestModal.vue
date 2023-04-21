@@ -1,36 +1,27 @@
 <template>
-  <VueFinalModal
-    v-bind="attrs"
-    class="flex justify-center items-center"
-    content-class="flex flex-col w-[40%] h-[40%] bg-white rounded-[10px]"
-  >
-    <h1 class="text-center text-2xl my-2">{{ title }}</h1>
+  <VueFinalModal v-bind="attrs" class="modal" :content-class="contentClass">
+    <h1 class="text-center text-2xl my-2">{{ attrs.title }}</h1>
     <div class="px-4 pt-2 flex-auto">
       <slot></slot>
     </div>
   </VueFinalModal>
 </template>
 
-<script>
+<script setup>
 import { VueFinalModal } from 'vue-final-modal'
 
-export default {
-  components: {
-    VueFinalModal,
+const props = defineProps({
+  size: {
+    type: String,
+    default: () => 'md',
   },
-  props: {
-    title: String,
-  },
-  emits: {
-    confirm: null,
-  },
-  setup(props, { attrs }) {
-    const { title } = toRefs(props)
+})
+const emit = defineEmits({
+  confirm: null,
+})
+const attrs = useAttrs()
 
-    return {
-      title,
-      attrs,
-    }
-  },
-}
+const { size } = toRefs(props)
+
+const contentClass = computed(() => `modal-content modal-${size.value}`)
 </script>

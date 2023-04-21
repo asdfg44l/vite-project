@@ -17,7 +17,10 @@
       name="email"
       rules="required|email"
     />
-    <button class="btn btn-sm btn-secondary rounded-[10px] block mt-auto -mx-4">
+    <button
+      v-if="attrs.haveButton"
+      class="btn btn-secondary rounded-[10px] block mt-auto -mx-4"
+    >
       Confirm
     </button>
   </form>

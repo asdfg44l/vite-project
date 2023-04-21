@@ -37,9 +37,25 @@ export default defineConfig({
         '.btn-sm': {
           padding: '.25rem .75rem',
         },
-        // '.btn--primary': {
-        //     backgroundColor: colors.emerald[500]
-        // }
+        '.modal': {
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          '&-content': {
+            display: 'flex',
+            flexDirection: 'column',
+            backgroundColor: colors.white,
+            borderRadius: '10px',
+          },
+          '&-md': {
+            width: '40%',
+            height: '40%',
+          },
+          '&-lg': {
+            width: '60%',
+            height: '60%',
+          },
+        },
       }
 
       addComponents(buttons)

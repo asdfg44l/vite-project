@@ -1,88 +1,87 @@
+import { defineAsyncComponent } from 'vue'
 import { useModal, useModalSlot } from 'vue-final-modal'
-// import { ActionContext, Commit } from 'vuex'
-import { DIALOGS } from '@/utils/config'
-import TestModal from '@/components/Modal/TestModal.vue'
-// import Greeting from '@/components/Greeting.vue'
-import TInputComposed from '@/components/TInputComposed.vue'
-import UserForm from '@/components/Form/UserForm.vue'
 
 function _initState() {
   return {
     TestModal: {
       key: Symbol.for('TestModal'),
     },
-    callback: {
-      ProfileEmail: (commit, value) =>
-        commit('profile/SetUserProfile', value, { root: true }),
-    },
   }
 }
+
+// function _modal_factory(
+//   component,
+//   attrs = {},
+//   title = '',
+//   slots = {},
+//   storePath = '',
+//   submit = () => {}
+// ) {
+//   const { open, close } = useModal({
+//     component,
+//     attrs,
+//     slots
+//   })
+// }
 
 export default {
   state: _initState(),
   actions: {
-    [DIALOGS.OPEN_TEST_MODAL](
+    // OPEN-
+    OPEN_FORM_MODAL(
       { commit },
-      { title = '', slots = {}, callback = () => {} } = {}
+      { layout = {}, slots = {}, storePath = '', submit = () => {} } = {}
     ) {
       const { open, close } = useModal({
-        component: TestModal,
+        component: defineAsyncComponent(() =>
+          import(
+            /* @vite-ignore */ `../../components/Modal/${layout.component}.vue`
+          )
+        ),
         attrs: {
           'overlay-transition': 'vfm-fade',
           'content-transition': 'vfm-fade',
-          onConfirm() {
-            close()
-          },
-          title,
+          ...layout.attrs,
         },
         slots: {
           default: useModalSlot({
-            component: TInputComposed,
-            attrs: {
-              name: 'emailx',
-              rules: 'required|email',
-              // 接收表單回傳的資料，並存在 store中
-              'onUpdate:modelValue': function (value) {
-                callback(commit, value)
-              },
-            },
-          }),
-          ...slots,
-        },
-      })
-      open()
-    },
-    [DIALOGS.OPEN_USER_MODAL](
-      { commit },
-      { title = '', slots = {}, callback = () => {}, submit = () => {} } = {}
-    ) {
-      const { open, close } = useModal({
-        component: TestModal,
-        attrs: {
-          'overlay-transition': 'vfm-fade',
-          'content-transition': 'vfm-fade',
-          title,
-        },
-        slots: {
-          default: useModalSlot({
-            component: UserForm,
+            component: defineAsyncComponent(() =>
+              import(
+                /* @vite-ignore */ `../../components/Form/${slots.default.component}.vue`
+              )
+            ),
             attrs: {
               onConfirm(value) {
                 // submit value
-                // if submit success send confirm event
+                // if submit success send close event
                 submit(value)
+                close()
+              },
+              onCancel() {
                 close()
               },
               // 接收表單輸入的資料，並存在 store中
               'onUpdate:userForm': function (value) {
-                callback(commit, value)
+                commit(storePath, value, { root: true })
               },
+              haveButton: true,
+              ...slots.default.attrs,
             },
           }),
-          ...slots,
         },
       })
       open()
+    },
+    OPEN_USER_MODAL({ dispatch }, { layout }) {
+      dispatch('OPEN_FORM_MODAL', {
+        layout,
+        slots: {
+          default: {
+            component: 'UserForm',
+          },
+        },
+        storePath: 'profile/SetUserProfile',
+      })
     },
   },
 }
