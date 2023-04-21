@@ -23,6 +23,7 @@ function vfmOpen() {
 }
 function formOpen() {
   dispatch(DIALOGS.OPEN_USER_MODAL, {
+    keepAlive: true,
     layout: {
       component: 'TestModal',
       attrs: {

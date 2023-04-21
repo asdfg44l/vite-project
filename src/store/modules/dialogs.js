@@ -6,6 +6,7 @@ function _initState() {
     TestModal: {
       key: Symbol.for('TestModal'),
     },
+    cacheModal: {},
   }
 }
 
@@ -29,10 +30,17 @@ export default {
   actions: {
     // OPEN-
     OPEN_FORM_MODAL(
-      { commit },
-      { layout = {}, slots = {}, storePath = '', submit = () => {} } = {}
+      { state, commit },
+      {
+        layout = {},
+        slots = {},
+        storePath = '',
+        submit = () => {},
+        keepAlive = false,
+      } = {}
     ) {
       const { open, close } = useModal({
+        keepAlive,
         component: defineAsyncComponent(() =>
           import(
             /* @vite-ignore */ `../../components/Modal/${layout.component}.vue`
@@ -70,9 +78,22 @@ export default {
           }),
         },
       })
+      if (keepAlive) {
+        state.cacheModal = {
+          ...state.cacheModal,
+          [slots.default.component]: {
+            open,
+            close,
+          },
+        }
+      }
       open()
     },
-    OPEN_USER_MODAL({ dispatch }, { layout }) {
+    OPEN_USER_MODAL({ state, dispatch }, { layout, keepAlive = false }) {
+      if (state.cacheModal.UserForm) {
+        state.cacheModal.UserForm.open()
+        return
+      }
       dispatch('OPEN_FORM_MODAL', {
         layout,
         slots: {
@@ -81,6 +102,7 @@ export default {
           },
         },
         storePath: 'profile/SetUserProfile',
+        keepAlive,
       })
     },
   },
