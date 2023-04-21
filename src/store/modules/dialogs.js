@@ -1,4 +1,6 @@
 import { useModal, useModalSlot } from 'vue-final-modal'
+// import { ActionContext, Commit } from 'vuex'
+import { DIALOGS } from '@/utils/config'
 import TestModal from '@/components/Modal/TestModal.vue'
 // import Greeting from '@/components/Greeting.vue'
 import TInputComposed from '@/components/TInputComposed.vue'
@@ -17,10 +19,9 @@ function _initState() {
 }
 
 export default {
-  namespaced: true,
-  state: () => _initState(),
+  state: _initState(),
   actions: {
-    OpenTestModal(
+    [DIALOGS.OPEN_TEST_MODAL](
       { commit },
       { title = '', slots = {}, callback = () => {} } = {}
     ) {
@@ -51,7 +52,7 @@ export default {
       })
       open()
     },
-    OpenUserModal(
+    [DIALOGS.OPEN_USER_MODAL](
       { commit },
       { title = '', slots = {}, callback = () => {}, submit = () => {} } = {}
     ) {

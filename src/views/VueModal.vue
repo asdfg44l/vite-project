@@ -13,9 +13,10 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { useVfm } from 'vue-final-modal'
 import { useStore } from 'vuex'
+import { DIALOGS } from '@/utils/config'
 
 const { state, dispatch } = useStore()
 const vfm = useVfm()
@@ -30,7 +31,7 @@ function vfmOpen() {
   vfm.open(Symbol.for('TestModal'))
 }
 function formOpen() {
-  dispatch('dialogs/OpenUserModal', {
+  dispatch(DIALOGS.OPEN_USER_MODAL, {
     title: 'User-Form',
     callback: state.dialogs.callback.ProfileEmail,
   })

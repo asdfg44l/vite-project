@@ -5,8 +5,7 @@ function _initProfile() {
   }
 }
 export default {
-  namespaced: true,
-  state: () => _initProfile(),
+  state: _initProfile(),
   mutations: {
     SetUserProfile: (state, { account, email }) => {
       state.userAccount = account

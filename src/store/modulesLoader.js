@@ -1,9 +1,9 @@
-const requestModules = import.meta.globEager('./modules/**/*.js')
+const requestModules = import.meta.globEager('./modules/**/*.(js|ts)')
 
 let modules = {}
 
 Object.keys(requestModules).forEach((path) => {
-  const routePath = path.replace(/(\.\/modules\/|\.js)/g, '').split('/')
+  const routePath = path.replace(/(\.\/modules\/|\.js|\.ts)/g, '').split('/')
 
   const haveSubDir = routePath.length > 1
 
@@ -17,6 +17,7 @@ Object.keys(requestModules).forEach((path) => {
           [pathName]: {
             ...obj.modules,
             ...requestModules[path].default,
+            namespaced: true,
           },
         }
         return
@@ -33,7 +34,10 @@ Object.keys(requestModules).forEach((path) => {
 
   const fileName = routePath[routePath.length - 1]
   modules.modules = modules.modules ?? {}
-  modules.modules[fileName] = { ...requestModules[path].default }
+  modules.modules[fileName] = {
+    ...requestModules[path].default,
+    namespaced: true,
+  }
 })
 modules = { ...modules.modules }
 
