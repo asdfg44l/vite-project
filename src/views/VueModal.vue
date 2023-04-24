@@ -24,13 +24,10 @@ function vfmOpen() {
 function formOpen() {
   dispatch(DIALOGS.OPEN_USER_MODAL, {
     keepAlive: true,
-    layout: {
-      component: 'TestModal',
-      attrs: {
-        title: 'User-Form',
-        size: 'md',
-      },
-    },
+    title: 'USER-FORM',
+    storePath: 'profile/SET_USER_PROFILE',
+    resetPath: 'profile/RESET_USER_PROFILE',
+    submitPath: 'profile/SEND_PROFILE',
   })
 }
 </script>

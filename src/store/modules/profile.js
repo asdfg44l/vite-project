@@ -1,18 +1,31 @@
 function _initProfile() {
   return {
-    userAccount: '',
-    userEmail: '',
+    user: {
+      account: '',
+      email: '',
+    },
   }
 }
 export default {
   state: _initProfile(),
+  actions: {
+    SEND_PROFILE(_, payload) {
+      console.log('send: ', payload)
+    },
+  },
   mutations: {
-    updateField(state, payload) {
+    RESET_ALL(state) {
+      state = _initProfile()
+    },
+    UPDATE_FIELD(state, payload) {
       state = { ...state, ...payload }
     },
-    SetUserProfile: (state, { account, email }) => {
-      state.userAccount = account
-      state.userEmail = email
+    SET_USER_PROFILE(state, payload) {
+      state.user = { ...payload }
+    },
+    RESET_USER_PROFILE(state) {
+      state.user.account = ''
+      state.user.email = ''
     },
   },
 }
