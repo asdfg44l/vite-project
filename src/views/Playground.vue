@@ -12,20 +12,37 @@
       <h2>Hello Title: {{ name }}</h2>
     </template>
   </TextContent>
+  <hr />
+  <UserForm
+    class="max-w-md"
+    @update:TForm="updateUserForm"
+    @exposeSubmit="(value) => (submit = value)"
+    @confirm="send"
+  />
+  <button type="submit" @click="submit()">submit</button>
 </template>
 
-<script>
-import { onBeforeRouteUpdate } from 'vue-router'
+<script setup>
 import TextContent from '@/components/Functional/TestFunctional.js'
 
-export default {
-  components: { TextContent },
-  setup() {
-    onBeforeRouteUpdate((to, from) => {
-      if (to.params.name === 'hello') {
-        console.log(to)
-      }
-    })
-  },
+const form = ref({
+  username: '',
+  userEmail: '',
+})
+const submit = ref()
+
+function updateUserForm({ account, email }) {
+  form.value.username = account
+  form.value.userEmail = email
 }
+
+function send(value) {
+  console.log(value)
+}
+
+onBeforeRouteUpdate((to, from) => {
+  if (to.params.name === 'hello') {
+    console.log(to)
+  }
+})
 </script>

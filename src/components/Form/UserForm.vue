@@ -19,7 +19,7 @@
     />
     <button
       v-if="attrs.haveButton"
-      class="btn btn-secondary rounded-[10px] block mt-auto -mx-4"
+      class="btn btn-secondary block mt-auto -mx-4"
     >
       Confirm
     </button>
@@ -27,11 +27,9 @@
 </template>
 
 <script setup>
-import { useForm } from 'vee-validate'
+import { useTForm } from './_useTForm'
 
-const props = defineProps({})
-
-const emit = defineEmits(['update:userForm', 'confirm'])
+const emit = defineEmits(['update:TForm', 'confirm', 'exposeSubmit'])
 
 const attrs = useAttrs()
 
@@ -40,16 +38,5 @@ const user = ref({
   email: '',
 })
 
-const { handleSubmit } = useForm()
-const onSubmit = handleSubmit((value) => {
-  emit('confirm', value)
-})
-
-watch(
-  () => user.value,
-  (val) => {
-    emit('update:userForm', val)
-  },
-  { deep: true }
-)
+const { onSubmit } = useTForm(user, emit)
 </script>

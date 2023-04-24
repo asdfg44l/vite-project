@@ -4,6 +4,12 @@
     <div class="px-4 pt-2 flex-auto">
       <slot></slot>
     </div>
+    <div
+      class="right-0 absolute px-3 pt-1 text-red-600 text-xl cursor-pointer"
+      @click="() => emit('closed')"
+    >
+      x
+    </div>
   </VueFinalModal>
 </template>
 
@@ -17,11 +23,13 @@ const props = defineProps({
   },
 })
 const emit = defineEmits({
-  confirm: null,
+  closed: null,
 })
 const attrs = useAttrs()
 
 const { size } = toRefs(props)
 
-const contentClass = computed(() => `modal-content modal-${size.value}`)
+const contentClass = computed(
+  () => `modal-content modal-${size.value} relative`
+)
 </script>
