@@ -11,6 +11,9 @@
         </option>
       </select>
       <h3>[Layout] default version: {{ VERSION }}</h3>
+      <p class="ml-5">
+        {{ $format.numberOnly('0.2113', 3, 'ROUND_CEIL') }}
+      </p>
     </div>
 
     <div class="flex gap-4">
@@ -28,28 +31,23 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import { useI18n } from 'vue-i18n'
+import { useFormat } from '@/plugins/Format'
 
-export default {
-  setup() {
-    const routerList = [
-      'veevalidate',
-      'vuefinalmodal',
-      'suspense',
-      'svgIcon',
-      'intersectionObserver',
-      'webworker',
-      'playground',
-    ]
-    const $i18n = useI18n()
-    const globalLanguage = ref($i18n.locale)
+const routerList = [
+  'veevalidate',
+  'vuefinalmodal',
+  'suspense',
+  'svgIcon',
+  'intersectionObserver',
+  'webworker',
+  'playground',
+]
+const $i18n = useI18n()
+const globalLanguage = ref($i18n.locale)
 
-    return {
-      VERSION: __APP_VERSION__,
-      routerList,
-      globalLanguage,
-    }
-  },
-}
+const { numberOnly } = useFormat()
+
+const VERSION = __APP_VERSION__
 </script>
