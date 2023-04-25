@@ -1,10 +1,11 @@
 import { inject } from 'vue'
-import { commonTime } from './date'
+import { AddTime, commonTime } from './date'
 
 const injectionKey = Symbol('formatPlugin')
 
 const format = {
   commonTime,
+  AddTime,
 }
 
 export function useFormat() {
