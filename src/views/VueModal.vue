@@ -1,5 +1,5 @@
 <template>
-  <h1 class="mb-3">vue-final-modal</h1>
+  <h1 class="mb-3 font-bruno">vue-final-modal</h1>
   <div class="flex gap-3">
     <button class="btn btn-sm btn-secondary" @click="vfmOpen()">
       Static Modal

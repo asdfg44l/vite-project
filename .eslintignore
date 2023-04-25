@@ -1,3 +1,5 @@
 **/*.md
+**/*.ttf
+**/*.scss
 *-lock.yaml
 .eslintrc.cjs

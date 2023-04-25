@@ -2,6 +2,7 @@
 .local
 /node_modules/**
 
+**/*.ttf
 **/*.svg
 **/*.sh
 

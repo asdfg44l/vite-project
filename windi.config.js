@@ -10,6 +10,10 @@ export default defineConfig({
       screens: {
         table: '765px',
       },
+      fontFamily: {
+        // sans: ['brunoAce'], //basic font
+        bruno: ['brunoAce'],
+      },
     },
   },
   shortcuts: {

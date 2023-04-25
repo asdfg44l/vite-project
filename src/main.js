@@ -1,6 +1,7 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 // plugins'
+import '@/assets/fonts/_fontCSS.scss'
 import 'virtual:windi.css'
 import 'virtual:svg-icons-register'
 import 'vue-final-modal/style.css'
