@@ -13,18 +13,19 @@ function _initState() {
 export default {
   state: _initState(),
   actions: {
-    // OPEN-
-    OPEN_FORM_MODAL(
+    GENERATE_FORM_MODAL(
       { dispatch, commit },
       {
         layout = {},
         slots = {},
+        keepAlive = false,
+        haveButton = true,
         storePath, // 存取的 mutation名稱
         resetPath, // 重置的 mutation名稱
         submitPath, // 表單送出時要 call哪個 action
-        keepAlive = false,
       } = {}
     ) {
+      // create Modal
       const { open, close, destroy } = useModal({
         keepAlive,
         component: defineAsyncComponent(() =>
@@ -37,10 +38,15 @@ export default {
           'content-transition': 'vfm-fade',
           onClosed() {
             if (resetPath) commit(resetPath, null, { root: true })
-            destroy()
-            commit('REMOVE_CACHE', {
+            commit('REMOVE_MODAL_CACHE', {
               componentName: slots.default.component,
             })
+            destroy()
+          },
+          // for closed by clicking the .vfm element.
+          onBeforeClose() {
+            const needResetStore = !keepAlive && resetPath
+            if (needResetStore) commit(resetPath, null, { root: true })
           },
           ...layout.attrs,
         },
@@ -65,67 +71,71 @@ export default {
                   componentName: slots.default.component,
                 })
               },
-              haveButton: true,
+              haveButton,
               ...slots.default.attrs,
             },
           }),
         },
       })
-      // 新增至cache
+      // 新增 Modal至cacheModal
       if (keepAlive)
-        commit('ADD_NEW_CACHE', {
+        commit('ADD_MODAL_CACHE', {
           componentName: slots.default.component,
           open,
           close,
         })
       open()
     },
-    OPEN_USER_MODAL(
+    OPEN_FORM_MODAL(
       { state, dispatch },
       {
-        layout,
         title,
         submitPath,
+        attrs = {},
+        outerModal = 'TestModal',
         size = 'md',
+        innerForm = '',
         storePath = '',
         resetPath = '',
         keepAlive = false,
+        haveButton = true,
       }
     ) {
-      const isCached = !!state.cacheModal.UserForm
+      const isCached = !!state.cacheModal[innerForm]
       if (isCached) {
-        state.cacheModal.UserForm.open()
+        state.cacheModal[innerForm].open()
         return
       }
-      dispatch('OPEN_FORM_MODAL', {
+      dispatch('GENERATE_FORM_MODAL', {
         layout: {
-          component: 'TestModal',
+          component: outerModal,
           attrs: {
             title,
             size,
+            ...attrs,
           },
-          ...layout,
         },
         slots: {
           default: {
-            component: 'UserForm',
+            component: innerForm,
           },
         },
         storePath,
         resetPath,
         submitPath,
         keepAlive,
+        haveButton,
       })
     },
   },
   mutations: {
-    ADD_NEW_CACHE(state, { componentName, open, close }) {
+    ADD_MODAL_CACHE(state, { componentName, open, close }) {
       state.cacheModal = {
         ...state.cacheModal,
         [componentName]: { open, close },
       }
     },
-    REMOVE_CACHE(state, { componentName }) {
+    REMOVE_MODAL_CACHE(state, { componentName }) {
       const isCached = !!state.cacheModal[componentName]
       if (isCached) {
         const { cacheModal } = { ...state }

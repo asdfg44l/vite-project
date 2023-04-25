@@ -1,5 +1,5 @@
 <template>
-  <TestModal :modal-id="TestModalId" />
+  <TestModal :modal-id="TestModalId" closed-by="id" />
 </template>
 
 <script>
