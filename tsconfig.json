@@ -16,7 +16,9 @@
     "types": ["vite/client"],
     "skipLibCheck": true,
     "noEmit": true,
-    "allowJs": true
+    "allowJs": true,
+    "allowImportingTsExtensions": true,
+    "forceConsistentCasingInFileNames": false
   },
   "include": [
     "*.d.ts",

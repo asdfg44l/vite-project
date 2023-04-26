@@ -1,8 +1,8 @@
 import type { App } from 'vue'
 import { inject } from 'vue'
 import BigNumber from 'bignumber.js'
-import * as datePlugin from './date'
-import * as bigNumberPlugin from './bigNumber'
+import * as datePlugin from './date.ts'
+import * as bigNumberPlugin from './bigNumber.ts'
 
 const injectionKey = Symbol('formatPlugin')
 

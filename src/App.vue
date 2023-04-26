@@ -13,6 +13,25 @@ export default {
     Layout,
     ModalsContainer,
   },
-  setup(props, context) {},
+  setup(props, context) {
+    const states = reactive({
+      deferredPrompt: null,
+    })
+    onMounted(() => {
+      window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault()
+        states.deferredPrompt = e
+      })
+      window.addEventListener('appinstalled', () => {
+        states.deferredPrompt = null
+      })
+      document.querySelector('#app').addEventListener('click', () => {
+        if (states.deferredPrompt) {
+          states.deferredPrompt.prompt()
+          states.deferredPrompt = null
+        }
+      })
+    })
+  },
 }
 </script>

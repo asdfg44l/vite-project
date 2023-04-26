@@ -1,0 +1,26 @@
+{
+    "name": "tsai dog",
+    "short_name": "tsai dog",
+    "theme_color": "#f85758",
+    "background_color": "#f85758",
+    "display": "fullscreen",
+    "scope": "/",
+    "start_url": "/",
+    "icons": [
+        {
+          "src": "icon-192x192.png",
+          "type": "image/png",
+          "sizes": "72x72"
+        },
+        {
+          "src": "icon-192x192.png",
+          "type": "image/png",
+          "sizes": "96x96"
+        },
+        {
+          "src": "icon-192x192.png",
+          "type": "image/png",
+          "sizes": "144x144"
+        }
+      ]
+  }
