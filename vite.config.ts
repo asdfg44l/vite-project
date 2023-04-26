@@ -24,6 +24,7 @@ export default defineConfig({
           '@/plugins/axios': ['useHttp'],
         },
       ],
+      dts: true,
     }),
     Components(),
     createSvgIconsPlugin({
