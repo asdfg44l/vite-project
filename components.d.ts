@@ -9,7 +9,6 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
-    _useTForm: typeof import('./src/components/Form/_useTForm.vue')['default']
     DialogGroup: typeof import('./src/components/Modal/DialogGroup.vue')['default']
     Greeting: typeof import('./src/components/Greeting.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
