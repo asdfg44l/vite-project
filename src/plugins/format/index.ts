@@ -4,23 +4,17 @@ import BigNumber from 'bignumber.js'
 import * as datePlugin from './date'
 import * as bigNumberPlugin from './bigNumber'
 
-const injectionKey = Symbol('formatPlugin')
-
-const format = {
+// export to global.d.ts
+export const format = {
   BigNumber,
   ...datePlugin,
   ...bigNumberPlugin,
 }
 
+const injectionKey = Symbol('formatPlugin')
+
 export function useFormat() {
   return inject(injectionKey) as typeof format
-}
-
-declare module 'vue' {
-  // Bind to `this` keyword
-  interface ComponentCustomProperties {
-    $format: typeof format
-  }
 }
 
 export const formatPlugin = {

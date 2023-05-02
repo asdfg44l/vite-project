@@ -1,5 +1,5 @@
 interface CustomRules {
-  [key: string]: any
+  [key: string]: (v: string) => boolean
 }
 
 const rules: CustomRules = {

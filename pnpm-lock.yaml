@@ -4,6 +4,9 @@ dependencies:
   '@vee-validate/rules':
     specifier: ^4.8.4
     version: 4.8.4(vue@3.2.47)
+  '@vue/runtime-core':
+    specifier: ^3.2.47
+    version: 3.2.47
   axios:
     specifier: ^0.27.2
     version: 0.27.2
