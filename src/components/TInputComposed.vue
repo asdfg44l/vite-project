@@ -11,7 +11,6 @@
       :type="attrs.type"
       @blur="validateOnBlur()"
     />
-    <!-- <button class="btn btn-secondary btn-sm">submit</button> -->
     <p v-if="meta.touched && errorMessage">{{ errorMessage }}</p>
     <p v-else class="invisible">default</p>
     <!-- <button class="btn btn-sm btn-secondary" @click="handleReset()">
