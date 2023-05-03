@@ -7,7 +7,6 @@
       label-class="block mb-1"
       title="Name"
       name="account"
-      rules="required"
     />
     <TInputComposed
       v-model="user.email"
@@ -15,7 +14,6 @@
       label-class="block mb-1"
       title="Email"
       name="email"
-      rules="required|email"
     />
     <button
       v-if="attrs.haveButton"
@@ -37,6 +35,11 @@ const user = ref({
   account: '',
   email: '',
 })
+// form rule schema
+const validationSchema = {
+  account: 'required',
+  email: 'required|email',
+}
 
-const { onSubmit } = useTForm(user, emit)
+const { onSubmit } = useTForm(user, emit, validationSchema)
 </script>

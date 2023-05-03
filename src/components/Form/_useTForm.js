@@ -1,8 +1,10 @@
 import { watch } from 'vue'
 import { useForm } from 'vee-validate'
 
-export function useTForm(form, emit) {
-  const { handleSubmit } = useForm()
+export function useTForm(form, emit, validationSchema = {}) {
+  const { handleSubmit } = useForm({
+    validationSchema,
+  })
   // emit confirm and value after validate passed
   const onSubmit = handleSubmit((value) => {
     emit('confirm', value)
