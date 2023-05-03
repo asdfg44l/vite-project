@@ -93,15 +93,15 @@
 </template>
 
 <script>
-import { ErrorMessage, Field, Form } from 'vee-validate'
+// import { ErrorMessage, Field, Form } from 'vee-validate'
 import { useI18n } from 'vue-i18n'
 
 export default {
-  components: {
-    Form,
-    Field,
-    ErrorMessage,
-  },
+  // components: {
+  //   Form,
+  //   Field,
+  //   ErrorMessage,
+  // },
   setup() {
     const unComposedEmail = ref(null)
     const composedEmail = ref(null)

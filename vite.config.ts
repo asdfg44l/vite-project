@@ -26,7 +26,15 @@ export default defineConfig({
       ],
       dts: true,
     }),
-    Components(),
+    Components({
+      extensions: ['vue'],
+      resolvers: [
+        (componentName) => {
+          if (['Form', 'Field', 'ErrorMessage'].includes(componentName))
+            return { name: componentName, from: 'vee-validate' }
+        },
+      ],
+    }),
     createSvgIconsPlugin({
       iconDirs: [path.resolve(process.cwd(), 'src/assets')],
       symbolId: 'trevi-[name]',

@@ -10,6 +10,9 @@ export {}
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     DialogGroup: typeof import('./src/components/Modal/DialogGroup.vue')['default']
+    ErrorMessage: typeof import('vee-validate')['ErrorMessage']
+    Field: typeof import('vee-validate')['Field']
+    Form: typeof import('vee-validate')['Form']
     Greeting: typeof import('./src/components/Greeting.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
