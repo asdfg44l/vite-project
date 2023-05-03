@@ -9,7 +9,7 @@
 │   └── favicon.ico
 ├── src
 │   ├── App.vue
-│   ├── assets                        //放置圖檔、字型及SCSS
+│   ├── assets                           //放置圖檔、字型及SCSS
 │   │   ├── card_club.svg
 │   │   ├── card_diamond.svg
 │   │   ├── card_heart.svg
@@ -73,16 +73,16 @@
 │   │   │   │   ├── HSBC.js
 │   │   │   │   └── localbanks
 │   │   │   │       └── THC.js
-│   │   │   ├── dialogs.js                //管理動態彈窗狀態
+│   │   │   ├── dialogs.js               //管理動態彈窗狀態
 │   │   │   └── profile.js
-│   │   ├── modulesLoader.js              //自動根據資料夾生成對應的 store modules 結構
+│   │   ├── modulesLoader.js             //自動根據資料夾生成對應的 store modules 結構
 │   │   └── types
 │   │       └── index.ts
-│   ├── utils                             //共用工具，包含狀態基礎定義
+│   ├── utils                            //共用工具，包含狀態基礎定義
 │   │   ├── config.ts
 │   │   ├── requestAnimationFrame.js
 │   │   └── test.ts
-│   └── views                             //各項功能的範例頁面
+│   └── views                            //各項功能的範例頁面
 │       ├── Home.vue
 │       ├── IntersectionObserver.vue
 │       ├── LayoutTest.vue
@@ -157,6 +157,16 @@
   > 結合 vee-validate，vue-final-modal 來實現動態彈出表單並通過 dialogs.js 來管理 <br>
   > 可以根據參數決定: 外層彈窗 layout，內部 Form，資料存取位置，發送資料的函式．
 - Plugins with TypeScript: Plugins 現在被註記上型別，方便在 vue template 以及 script 中使用 Type Hint
+
+## Notice
+
+註記一些使用上偶爾會遇到的問題，以及其解法
+
+### 關於 script 與 script setup 混用
+
+有些 option 目前是不能使用在 script setup 上的(ex: inheritAttrs)，這時候就會需要混用 script(ex: TInputComposed.vue)<br>
+不過這時候要注意，保持 script 在前 script setup 在後的宣告方式，並且將所有的 import 都移到 script 中，否則 eslint 會自動將 script 中的 export 項目合併到 script setup．<br>
+(ex: Playground.vue)
 
 ## Pre-commit
 

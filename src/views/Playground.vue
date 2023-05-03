@@ -22,9 +22,19 @@
   <button type="submit" @click="submit()">submit</button>
 </template>
 
-<script setup>
+<script>
 import TextContent from '@/components/Functional/TestFunctional.js'
 
+export default {
+  beforeRouteEnter: (to, from, next) => {
+    next((vm) => {
+      console.log(vm)
+    })
+  },
+}
+</script>
+
+<script setup>
 const form = ref({
   username: '',
   userEmail: '',
