@@ -1,12 +1,11 @@
 import { inject } from 'vue'
 
-function AnimationFrame(callback) {
+function AnimationFrame(switcher, callback) {
   const animate = (timestamp) => {
     callback(timestamp)
-    requestAnimationFrame(animate)
+    switcher.value = requestAnimationFrame(animate)
   }
-
-  return () => requestAnimationFrame(animate)
+  return animate
 }
 
 const injectionKey = Symbol('AnimationFramePlugin')

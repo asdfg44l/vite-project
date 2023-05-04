@@ -11,7 +11,7 @@
         </option>
       </select>
       <h3>[Layout] default version: {{ VERSION }}</h3>
-      <p class="ml-5">
+      <p class="ml-3">
         {{ $format.numberOnly('0.2113', 3, 'ROUND_CEIL') }}
       </p>
     </div>
@@ -43,6 +43,7 @@ const routerList = [
   'intersectionObserver',
   'webworker',
   'playground',
+  'RequestAnimationFrame',
 ]
 const $i18n = useI18n()
 const globalLanguage = ref($i18n.locale)

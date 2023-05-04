@@ -40,6 +40,11 @@ const routes = [
     component: () => import('@/views/Playground.vue'),
   },
   {
+    name: 'requestAnimationFrame',
+    path: '/requestAnimationFrame',
+    component: () => import('@/views/RequestAnimationFrame.vue'),
+  },
+  {
     name: 'layouttest',
     path: '/layouttest',
     meta: { layoutName: 'New' },
