@@ -47,7 +47,7 @@ const routerList = [
 const $i18n = useI18n()
 const globalLanguage = ref($i18n.locale)
 
-const { numberOnly } = useFormat()
+const { numberOnly, BigNumber } = useFormat()
 
 const VERSION = __APP_VERSION__
 </script>

@@ -8,7 +8,6 @@ import store from '@/store'
 import router from '@/router'
 
 export function APP_INITIAL(app) {
-  // import.meta.globEager("@/assets/*.svg")
   app.use(i18n)
   app.use(router)
   app.use(store)
