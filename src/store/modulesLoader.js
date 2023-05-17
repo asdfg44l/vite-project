@@ -1,5 +1,6 @@
-const requestModules = import.meta.globEager('./modules/**/*.(js|ts)')
-
+const requestModules = import.meta.glob('./modules/**/*.(js|ts)', {
+  eager: true,
+})
 let modules = {}
 
 Object.keys(requestModules).forEach((path) => {
@@ -22,10 +23,11 @@ Object.keys(requestModules).forEach((path) => {
         }
         return
       }
+
+      obj.modules = obj.modules ?? { [pathName]: { modules: {} } }
       obj.modules = obj.modules[pathName]
         ? { ...obj.modules }
         : { ...obj.modules, [pathName]: { modules: {} } }
-
       createModules(obj.modules[pathName], index + 1)
     }
     createModules(modules)
