@@ -1,13 +1,27 @@
 import { createI18n } from 'vue-i18n'
-import global from '@/locales/_global.json'
-import enUS from '@/locales/en-us.json'
-import zhTW from '@/locales/zh-tw.json'
 
-const en_us = { ...global, ...enUS }
-const zh_tw = { ...global, ...zhTW }
+function getLocales() {
+  const locales = import.meta.glob<any>('../locales/*.json', { eager: true })
+  const localeMaps = Object.fromEntries(
+    Object.entries(locales).map(([path, locale]) => [
+      path.match(/([\w-]*)\.json$/)?.[1],
+      locale.default,
+    ])
+  )
 
-type MessageSchema = typeof en_us
-type LanguageList = 'en-us' | 'zh-tw'
+  const mergeNormalWithGlobal = (
+    list: Record<string, Record<string, string>>
+  ) => {
+    const { _global, ...others } = list
+
+    for (const key in others) {
+      others[key] = { ..._global, ...others[key] }
+    }
+    return others
+  }
+
+  return mergeNormalWithGlobal(localeMaps)
+}
 
 function getUserLocales() {
   let locales = window.navigator.language.toLowerCase()
@@ -19,16 +33,16 @@ function getUserLocales() {
     default:
       break
   }
+
   return locales
 }
 
-const i18n = createI18n<[MessageSchema], LanguageList>({
+const i18n = createI18n({
   legacy: false,
   locale: getUserLocales(),
   fallbackLocale: 'zh-tw',
   messages: {
-    'en-us': en_us,
-    'zh-tw': zh_tw,
+    ...getLocales(),
   },
 })
 
