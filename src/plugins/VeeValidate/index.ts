@@ -8,9 +8,9 @@ import i18n from '@/plugins/I18n'
 // 擴展規則: 在 wording中以 fields > name > rules這三個順序做分層
 configure({
   generateMessage: (context) => {
-    const currentLocale = i18n.global.locale
+    const currentLocale: unknown = i18n.global.locale
     const isRuleWordingExist = (key = '') => {
-      return i18n.global.te(`fields.${key}`, currentLocale)
+      return i18n.global.te(`fields.${key}`, currentLocale as string)
     }
     // 根據專一性取得要使用的 wording
     // ex: email.required會優先於 required的 wording
