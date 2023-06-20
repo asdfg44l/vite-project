@@ -15,6 +15,7 @@ export default defineConfig({
     vue(),
     WindiCSS(),
     AutoImport({
+      dts: 'src/auto-imports.d.ts',
       imports: [
         'vue',
         'vue-router',
@@ -24,9 +25,9 @@ export default defineConfig({
           '@/plugins/axios': ['useHttp'],
         },
       ],
-      dts: true,
     }),
     Components({
+      dts: 'src/components.d.ts',
       extensions: ['vue'],
       resolvers: [
         (componentName) => {
