@@ -19,38 +19,22 @@
   </div>
 </template>
 
-<script>
-export default {
+<script setup lang="ts">
+const props = defineProps<{
+  handleReset?: Function
+  resetField?: Function
+}>()
+defineOptions({
   inheritAttrs: false,
-  props: {
-    modelValue: {
-      type: [String, Number, Object, undefined],
-    },
-    handleReset: {
-      type: Function,
-    },
-    resetField: {
-      type: Function,
-    },
-  },
-  emits: {
-    'update:modelValue': null,
-  },
-  setup(props, { attrs, emit }) {
-    const inputValue = ref(null)
-    const { handleReset, resetField } = toRefs(props)
+})
+// defineEmits('update:modelValue')
+const attrs: any = useAttrs()
+const inputValue = defineModel()
 
-    watch(
-      () => inputValue.value,
-      (val) => emit('update:modelValue', val)
-    )
+const { handleReset, resetField } = toRefs(props)
 
-    return {
-      attrs,
-      inputValue,
-      handleReset,
-      resetField,
-    }
-  },
-}
+// watch(
+//   () => inputValue.value,
+//   (val) => emit('update:modelValue', val)
+// )
 </script>

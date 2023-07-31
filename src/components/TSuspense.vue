@@ -7,27 +7,16 @@
   </Suspense>
 </template>
 
-<script>
-import { toRefs } from 'vue'
-
-export default {
-  props: {
-    pending: {
-      type: Function,
-      default: () => console.log('pending'),
-    },
-    resolve: {
-      type: Function,
-      default: () => console.log('resolve'),
-    },
+<script setup>
+const props = defineProps({
+  pending: {
+    type: Function,
+    default: () => console.log('pending'),
   },
-  setup(props) {
-    const { pending, resolve } = toRefs(props)
-
-    return {
-      pending,
-      resolve,
-    }
+  resolve: {
+    type: Function,
+    default: () => console.log('resolve'),
   },
-}
+})
+const { pending, resolve } = toRefs(props)
 </script>
