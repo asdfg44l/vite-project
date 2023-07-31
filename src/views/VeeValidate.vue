@@ -92,38 +92,23 @@
   </Form>
 </template>
 
-<script>
-// import { ErrorMessage, Field, Form } from 'vee-validate'
+<script setup>
 import { useI18n } from 'vue-i18n'
 
-export default {
-  // components: {
-  //   Form,
-  //   Field,
-  //   ErrorMessage,
-  // },
-  setup() {
-    const unComposedEmail = ref(null)
-    const composedEmail = ref(null)
+const unComposedEmail = ref(null)
+const composedEmail = ref(null)
 
-    const onSubmit = (values) => console.log(values)
-    const schema = {
-      email3: 'required|email',
-      user: 'required|min:3|max:6',
-      password: 'required',
-      confirmPassword: 'required|confirmed:@password',
-      _custom_field_name: 'required',
-    }
-
-    const $i18n = useI18n()
-    $i18n.locale.value = 'en-us'
-
-    return {
-      onSubmit,
-      schema,
-      composedEmail,
-      unComposedEmail,
-    }
-  },
+function onSubmit(values) {
+  return console.log(values)
 }
+const schema = {
+  email3: 'required|email',
+  user: 'required|min:3|max:6',
+  password: 'required',
+  confirmPassword: 'required|confirmed:@password',
+  _custom_field_name: 'required',
+}
+
+const $i18n = useI18n()
+$i18n.locale.value = 'en-us'
 </script>

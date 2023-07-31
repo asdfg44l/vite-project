@@ -13,17 +13,10 @@
   ></div>
 </template>
 
-<script>
-export default {
-  setup() {
-    const iconAmount = ref(5)
-    const onViewEntry = () => (iconAmount.value += 1)
-
-    return {
-      iconAmount,
-      onViewEntry,
-    }
-  },
+<script setup>
+const iconAmount = ref(5)
+function onViewEntry() {
+  return (iconAmount.value += 1)
 }
 </script>
 

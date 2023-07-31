@@ -40,37 +40,30 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import MulityWorker from '@/plugins/Web_worker/multiply.js?worker'
 import { createConnect } from '@/plugins/Web_worker/websocket.js'
 
 const socketKey =
   'wss://demo.piesocket.com/v3/channel_123?api_key=VCXCEuvhGcBDP7XhiJJUDvR1e1D3eiVjgZ9VRiaV'
-export default {
-  setup() {
-    // mulity
-    const multInput = ref('')
-    const multOutput = ref('')
-    const mulity = new MulityWorker()
-    const mulitySendMge = () => mulity.postMessage(multInput.value)
-    mulity.onmessage = (e) => (multOutput.value = e.data)
 
-    // websocket
-    const socketInput = ref('')
-    const ws = createConnect(socketKey)
-    const socketSendMsg = () => ws.send(socketInput.value)
-
-    onUnmounted(() => {
-      ws.close()
-    })
-
-    return {
-      multInput,
-      multOutput,
-      mulitySendMge,
-      socketInput,
-      socketSendMsg,
-    }
-  },
+// mulity
+const multInput = ref('')
+const multOutput = ref('')
+const mulity = new MulityWorker()
+function mulitySendMge() {
+  return mulity.postMessage(multInput.value)
 }
+mulity.onmessage = (e) => (multOutput.value = e.data)
+
+// websocket
+const socketInput = ref('')
+const ws = createConnect(socketKey)
+function socketSendMsg() {
+  return ws.send(socketInput.value)
+}
+
+onUnmounted(() => {
+  ws.close()
+})
 </script>
