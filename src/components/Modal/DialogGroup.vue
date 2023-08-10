@@ -1,15 +1,11 @@
 <template>
   <TestModal :modal-id="TestModalId" closed-by="id" />
+  <Spinner :modal-id="SpinnerModalId" />
 </template>
 
-<script>
-export default {
-  setup() {
-    const { state } = useStore()
+<script setup>
+const dialogsStore = useDialogsStore()
 
-    return {
-      TestModalId: state.dialogs.TestModal.key,
-    }
-  },
-}
+const TestModalId = dialogsStore.TestModal.key
+const SpinnerModalId = dialogsStore.Spinner.key
 </script>

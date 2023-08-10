@@ -1,8 +1,7 @@
 import axios from 'axios'
 import { v4 as uuidv4 } from 'uuid'
 
-// import store from '@/store'
-// import { useLoginStore, useUIStore } from '@/store'
+import { useUIStore } from '@/store'
 import router from '@/router'
 
 const instance = axios.create({
@@ -18,15 +17,15 @@ function closeGlobalSpinner(config) {
   const uuid = config.uuid
   queue.delete(uuid)
   if (queue.size === 0) {
-    // const UIStore = useUIStore()
-    // UIStore.CLOSE_GLOBAL_SPINNER()
+    const UIStore = useUIStore()
+    UIStore.CLOSE_GLOBAL_SPINNER()
   }
 }
 
 instance.interceptors.request.use(async (config) => {
   if (!config.hideGlobalSpinner) {
-    // const UIStore = useUIStore()
-    // await UIStore.OPEN_GLOBAL_SPINNER()
+    const UIStore = useUIStore()
+    await UIStore.OPEN_GLOBAL_SPINNER()
   }
 
   const uuid = uuidv4()

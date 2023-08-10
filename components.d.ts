@@ -20,6 +20,7 @@ declare module '@vue/runtime-core' {
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     SearchForm: typeof import('./src/components/Form/SearchForm.vue')['default']
+    Spinner: typeof import('./src/components/Modal/Spinner.vue')['default']
     TestModal: typeof import('./src/components/Modal/TestModal.vue')['default']
     TIcon: typeof import('./src/components/TIcon.vue')['default']
     TInput: typeof import('./src/components/TInput.vue')['default']

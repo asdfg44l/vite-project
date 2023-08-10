@@ -25,6 +25,9 @@ export default defineConfig({
         'vuex',
         'vee-validate',
         {
+          '@/store/index': ['useProfileStore', 'useUIStore', 'useDialogsStore'],
+        },
+        {
           '@/plugins/axios': ['useHttp'],
         },
       ],

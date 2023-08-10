@@ -12,23 +12,20 @@
 
 <script setup lang="ts">
 import { useVfm } from 'vue-final-modal'
-import { useStore } from 'vuex'
-import { DIALOGS } from '@/utils/config'
 
-const { dispatch } = useStore()
 const vfm = useVfm()
 
 function vfmOpen() {
-  vfm.open(Symbol.for('TestModal'))
+  vfm.open(Symbol.for('Spinner'))
 }
 function formOpen() {
-  dispatch(DIALOGS.OPEN_FORM_MODAL, {
-    keepAlive: true,
-    title: 'USER-FORM',
-    innerForm: 'UserForm',
-    storePath: 'profile/SET_USER_PROFILE',
-    resetPath: 'profile/RESET_USER_PROFILE',
-    submitPath: 'profile/SEND_PROFILE',
-  })
+  // dispatch(DIALOGS.OPEN_FORM_MODAL, {
+  //   keepAlive: true,
+  //   title: 'USER-FORM',
+  //   innerForm: 'UserForm',
+  //   storePath: 'profile/SET_USER_PROFILE',
+  //   resetPath: 'profile/RESET_USER_PROFILE',
+  //   submitPath: 'profile/SEND_PROFILE',
+  // })
 }
 </script>
