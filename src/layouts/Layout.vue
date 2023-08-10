@@ -4,30 +4,31 @@
   </component>
 </template>
 
-<script lang="ts">
-import { computed, defineAsyncComponent, toRefs } from 'vue'
+<script setup lang="ts">
 import { useRoute } from 'vue-router'
 
-export default {
-  props: {
-    name: String,
+const props = defineProps<{
+  name?: String
+}>()
+
+const { name: layoutName } = toRefs(props)
+const route = useRoute()
+const layout = shallowRef('div')
+
+watch(
+  () => route.meta?.layoutName,
+  (val) => {
+    const layoutPath = layoutName?.value ?? val ?? 'Default'
+
+    layout.value = defineAsyncComponent(
+      () =>
+        import(
+          layoutPath === 'Default'
+            ? `./DefaultLayout.vue`
+            : `./${layoutPath}Layout.vue`
+        )
+    )
   },
-  setup(props) {
-    const { name: layoutName } = toRefs(props)
-    const route = useRoute()
-
-    const layout = computed(() => {
-      const layoutPrefix =
-        layoutName.value ?? (route.meta.layoutName as string) ?? 'Default'
-
-      return defineAsyncComponent(
-        () => import(/* @vite-ignore */ `./${layoutPrefix}Layout.vue`)
-      )
-    })
-
-    return {
-      layout,
-    }
-  },
-}
+  { immediate: true }
+)
 </script>
