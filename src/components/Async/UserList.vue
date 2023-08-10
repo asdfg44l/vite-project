@@ -3,10 +3,9 @@
 </template>
 
 <script setup lang="ts">
+import axios from 'axios'
+
 const userList = ref<{ email: string }[]>([])
-const http = useHttp()
 // axios
-userList.value = (
-  await http.HTTP_GET('https://randomuser.me/api/')
-).data.results
+userList.value = (await axios.get('https://randomuser.me/api/')).data.results
 </script>

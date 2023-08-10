@@ -21,6 +21,7 @@
     "maska": "^2.1.10",
     "unplugin-auto-import": "^0.16.4",
     "unplugin-vue-components": "^0.24.1",
+    "uuid": "^9.0.0",
     "vee-validate": "^4.8.4",
     "vue": "^3.3.4",
     "vue-final-modal": "^4.3.1",
