@@ -78,9 +78,13 @@
     </div>
     <!-- custom errorMessage -->
     <div>
-      <label for="_custom_field_name">customName: </label>
+      <label for="_custom_field_name">customName (只可輸入英數字): </label>
+      <br />
       <Field
         id="_custom_field_name"
+        v-maska
+        data-maska="#"
+        data-maska-tokens="#:[a-zA-Z0-9]:repeated"
         name="_custom_field_name"
         label="nice"
         class="form-control"
@@ -88,7 +92,7 @@
       <ErrorMessage name="_custom_field_name" />
     </div>
 
-    <p>{{ errors }}</p>
+    <p class="my-3">{{ errors }}</p>
     <button class="btn btn-sm btn-secondary" @click="onSubmit(handleSubmit)">
       Submit
     </button>

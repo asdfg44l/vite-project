@@ -1,4 +1,5 @@
 import { createVfm } from 'vue-final-modal'
+import { vMaska } from 'maska'
 import { VueAxios } from './axios'
 import { formatPlugin } from './Format'
 import { IntersectionObserver } from './Vdirectives/IntersectionObserver'
@@ -17,6 +18,7 @@ export function APP_INITIAL(app) {
   app.use(formatPlugin)
   app.use(AnimationFramePlugin)
   app.directive('insectOb', IntersectionObserver)
+  app.directive('maska', vMaska)
   app.config.globalProperties.console = console
   initVeeValidateRules()
 

@@ -23,6 +23,9 @@ dependencies:
   lodash:
     specifier: ^4.17.21
     version: 4.17.21
+  maska:
+    specifier: ^2.1.10
+    version: 2.1.10
   unplugin-auto-import:
     specifier: ^0.16.4
     version: 0.16.4(@vueuse/core@10.2.0)
@@ -3321,6 +3324,10 @@ packages:
     dependencies:
       object-visit: 1.0.1
     dev: true
+
+  /maska@2.1.10:
+    resolution: {integrity: sha512-oQLLUCJ4qG1YFHSGQB9P6G0LKSmAwHFFBFhmkJ9pcSUXXDZew5NNTBbPACiixqFBaU7M7LydPlrL0DmI1p+ufQ==}
+    dev: false
 
   /mdast-util-from-markdown@0.8.5:
     resolution: {integrity: sha512-2hkTXtYYnr+NubD/g6KGBS/0mFmBcifAsI0yIWRiRo0PjVs6SSOSOdtzbp6kSGnShDN6G5aWZpKQ2lWRy27mWQ==}
