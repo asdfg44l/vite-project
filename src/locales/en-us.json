@@ -1,9 +1,13 @@
 {
-  "hello": "hello Member",
-  "fields": {
-    "required": "Value is required",
-    "emailx": {
-      "required": "Email is required xxx"
+  "common": {
+    "formError": {
+      "required": "Can not be empty.",
+      "minLength": "Can not be less than {min} digits!",
+      "maxLength": "Can not be more than {max} digits!",
+      "between": "Enter between {min}~{max}",
+      "confirm": "{field} do not match!",
+      "notBeTheSame": "Not be the same as {field}",
+      "thousandthsLessThan": "Minimum value cannot exceed maximum value."
     }
   }
 }

@@ -25,6 +25,7 @@
 </template>
 
 <script setup>
+import { object, string } from 'yup'
 import { useTForm } from './_useTForm'
 
 const emit = defineEmits(['update:TForm', 'confirm', 'exposeSubmit'])
@@ -36,10 +37,10 @@ const user = ref({
   email: '',
 })
 // form rule schema
-const validationSchema = {
-  account: 'required',
-  email: 'required|email',
-}
+const validationSchema = object({
+  account: string().required(),
+  email: string().required().email(),
+})
 
 const { onSubmit } = useTForm(user, emit, validationSchema)
 </script>

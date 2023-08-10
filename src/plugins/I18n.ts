@@ -23,6 +23,7 @@ function getLocales() {
   return mergeNormalWithGlobal(localeMaps)
 }
 
+// 取得本地語系
 function getUserLocales() {
   let locales = window.navigator.language.toLowerCase()
   // en 開頭的語系預設都是用 en-us
@@ -39,8 +40,8 @@ function getUserLocales() {
 
 const i18n = createI18n({
   legacy: false,
-  locale: getUserLocales(),
-  fallbackLocale: 'zh-tw',
+  locale: 'en-us', // 需要使用本地語系的時候再使用 getUserLocales
+  fallbackLocale: 'en-us',
   messages: {
     ...getLocales(),
   },

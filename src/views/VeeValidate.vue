@@ -1,12 +1,12 @@
 <template>
   <!-- field components -->
-  <Form rules="email">
+  <!-- <Form rules="email">
     <label class="mr-2 inline-block w-[55px]" for="email1">Email1:</label>
     <Field id="email1" class="form-control" name="email1" />
     <ErrorMessage name="email1" />
-  </Form>
+  </Form> -->
   <!-- field with custom input -->
-  <Form v-slot="{ resetForm }" @submit="onSubmit">
+  <!-- <Form v-slot="{ resetForm }" @submit="onSubmit">
     <Field
       v-slot="{ handleReset, resetField, ...other }"
       name="email2"
@@ -19,7 +19,7 @@
         :reset-field="resetField"
       />
     </Field>
-    <!-- <p>{{ unComposedEmail }}</p> -->
+    <p>{{ unComposedEmail }}</p>
     <TInputComposed
       id="emailx"
       v-model="composedEmail"
@@ -29,13 +29,16 @@
       type="text"
       input-class="px-4 py-1"
     />
-    <!-- <p>{{ composedEmail }}</p> -->
-  </Form>
+    <p>{{ composedEmail }}</p>
+  </Form> -->
   <hr class="my-3" />
 
   <!-- validate-schema -->
   <p class="mb-3">Validate Schema</p>
-  <Form v-slot="{ errors, resetForm, meta }" :validation-schema="schema">
+  <Form
+    v-slot="{ errors, resetForm, meta, handleSubmit }"
+    :validation-schema="schema"
+  >
     <!-- email3 -->
     <div class="mb-2">
       <label class="mr-2 inline-block w-[55px]" for="email3">Email3:</label>
@@ -53,6 +56,7 @@
       <label class="mr-2 inline-block w-[70px]" for="password">Password:</label>
       <Field
         id="password"
+        v-model="password"
         class="form-control"
         type="password"
         name="password"
@@ -85,30 +89,41 @@
     </div>
 
     <p>{{ errors }}</p>
-    <p>{{ $t('hello') }}</p>
-    <button class="btn btn-sm btn-secondary" @click="resetForm()">
-      ResetForm
+    <button class="btn btn-sm btn-secondary" @click="onSubmit(handleSubmit)">
+      Submit
     </button>
   </Form>
 </template>
 
 <script setup>
 import { useI18n } from 'vue-i18n'
+import { object, string } from 'yup'
 
-const unComposedEmail = ref(null)
-const composedEmail = ref(null)
-
-function onSubmit(values) {
-  return console.log(values)
-}
-const schema = {
-  email3: 'required|email',
-  user: 'required|min:3|max:6',
-  password: 'required',
-  confirmPassword: 'required|confirmed:@password',
-  _custom_field_name: 'required',
-}
+// const unComposedEmail = ref(null)
+// const composedEmail = ref(null)
+const password = ref('')
 
 const $i18n = useI18n()
 $i18n.locale.value = 'en-us'
+
+const schema = object({
+  email3: string().required().email(),
+  user: string().required().min(3).max(6),
+  password: string().required(),
+  confirmPassword: string().sequence([
+    () => string().required(),
+    () =>
+      string().oneOf(
+        [password.value],
+        $i18n.t('common.formError.confirm', { field: 'confirmPassword' })
+      ),
+  ]),
+  _custom_field_name: string().required(),
+})
+
+function onSubmit(handleSubmit) {
+  handleSubmit((value) => {
+    console.log(value)
+  })
+}
 </script>
