@@ -92,6 +92,7 @@ declare global {
   const useSubmitCount: typeof import('vee-validate')['useSubmitCount']
   const useSubmitForm: typeof import('vee-validate')['useSubmitForm']
   const useTForm: typeof import('./src/components/Form/_useTForm.js')['useTForm']
+  const useTInput: typeof import('./src/components/_useInput.js')['useTInput']
   const useValidateField: typeof import('vee-validate')['useValidateField']
   const useValidateForm: typeof import('vee-validate')['useValidateForm']
   const validate: typeof import('vee-validate')['validate']

@@ -1,45 +1,41 @@
 <template>
-  <Form class="flex flex-col h-full" @submit="onSubmit">
+  <div class="flex flex-col h-full" :validation-schema="validationSchema">
     <TInputComposed
-      v-model="user.account"
+      v-model="user.type"
       class="mb-4"
       input-class="block w-full px-2 py-1"
       label-class="block mb-1"
-      title="Name"
-      name="account"
+      title="Type"
+      name="type"
     />
     <TInputComposed
-      v-model="user.email"
+      v-model="user.name"
       input-class="block w-full px-2 py-1"
       label-class="block mb-1"
-      title="Email"
-      name="email"
+      title="Name"
+      name="name"
     />
-    <button
-      v-if="attrs.haveButton"
-      class="btn btn-secondary block mt-auto -mx-4"
-    >
+    <button class="btn btn-secondary block mt-auto -mx-4" @click="onSubmit()">
       Confirm
     </button>
-  </Form>
+  </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { object, string } from 'yup'
-import { useTForm } from './_useTForm'
 
 const emit = defineEmits(['update:TForm', 'confirm', 'exposeSubmit'])
 
 const attrs = useAttrs()
 
 const user = reactive({
-  account: '',
-  email: '',
+  type: '',
+  name: '',
 })
 // form rule schema
 const validationSchema = object({
-  account: string().required(),
-  email: string().required().email(),
+  type: string().required(),
+  name: string().required(),
 })
 
 const { onSubmit } = useTForm(user, emit, validationSchema)

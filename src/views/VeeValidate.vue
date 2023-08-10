@@ -97,6 +97,10 @@
       Submit
     </button>
   </Form>
+
+  <!-- form component -->
+  <div class="my-2">SearchForm</div>
+  <SearchForm @confirm="($event) => console.log($event)" />
 </template>
 
 <script setup>

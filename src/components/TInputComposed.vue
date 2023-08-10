@@ -5,7 +5,7 @@
     </label>
     <input
       :id="attrs.id"
-      v-model.lazy="modelValue"
+      v-model="value"
       class="form-control"
       :class="attrs['input-class']"
       :type="attrs.type"
@@ -23,22 +23,27 @@
 </template>
 
 <script setup lang="ts">
+import { useTInput } from './_useInput'
+
 const props = defineProps<{
+  modelValue: string | number | Record<string, any> | undefined
   name: string
   rules?: string | Record<any, any>
 }>()
+const emit = defineEmits(['update:modelValue'])
 defineOptions({
   inheritAttrs: false,
 })
 const attrs: any = useAttrs()
-const modelValue = defineModel()
 
-const { name, rules } = toRefs(props)
+const { modelValue, name, rules } = toRefs(props)
 
-const { errorMessage, handleBlur, validate, meta } = useField(name, rules, {
-  initialValue: null,
-  validateOnValueUpdate: false, // validate only onblur
+const { value, errorMessage, handleBlur, validate, meta } = useTInput(emit, {
+  modelValue,
+  name,
+  rules,
 })
+
 async function validateOnBlur() {
   handleBlur()
   if (meta.touched) await validate()

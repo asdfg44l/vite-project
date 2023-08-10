@@ -13,7 +13,7 @@ export function useTForm(form, emit, validationSchema = {}) {
   emit('exposeSubmit', onSubmit)
 
   watch(
-    () => form.value,
+    () => form,
     (val) => emit('update:TForm', val),
     { deep: true }
   )
