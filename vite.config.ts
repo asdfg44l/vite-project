@@ -28,10 +28,12 @@ export default defineConfig({
           '@/plugins/axios': ['useHttp'],
         },
       ],
+      dirs: ['./src/components/**'],
       dts: true,
     }),
     Components({
       extensions: ['vue'],
+      dirs: ['./src/components/**', './src/layouts/**'],
       resolvers: [
         (componentName) => {
           if (['Form', 'Field', 'ErrorMessage'].includes(componentName))
@@ -58,5 +60,13 @@ export default defineConfig({
   },
   server: {
     port: 3000,
+    proxy: {
+      // 帶選項寫法：http://localhost:3000/api/bar -> http://10.1.7.106:8080/bar
+      '/api': {
+        target: 'http://10.1.7.106:8080',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, ''),
+      },
+    },
   },
 })

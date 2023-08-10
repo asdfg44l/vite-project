@@ -9,11 +9,14 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    DefaultLayout: typeof import('./src/layouts/DefaultLayout.vue')['default']
     DialogGroup: typeof import('./src/components/Modal/DialogGroup.vue')['default']
     ErrorMessage: typeof import('vee-validate')['ErrorMessage']
     Field: typeof import('vee-validate')['Field']
     Form: typeof import('vee-validate')['Form']
     Greeting: typeof import('./src/components/Greeting.vue')['default']
+    Layout: typeof import('./src/layouts/Layout.vue')['default']
+    NewLayout: typeof import('./src/layouts/NewLayout.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     TestModal: typeof import('./src/components/Modal/TestModal.vue')['default']
