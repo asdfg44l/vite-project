@@ -18,14 +18,18 @@ const vfm = useVfm()
 function vfmOpen() {
   vfm.open(Symbol.for('Spinner'))
 }
+
+const dialogsStore = useDialogsStore()
 function formOpen() {
-  // dispatch(DIALOGS.OPEN_FORM_MODAL, {
-  //   keepAlive: true,
-  //   title: 'USER-FORM',
-  //   innerForm: 'UserForm',
-  //   storePath: 'profile/SET_USER_PROFILE',
-  //   resetPath: 'profile/RESET_USER_PROFILE',
-  //   submitPath: 'profile/SEND_PROFILE',
-  // })
+  dialogsStore.OPEN_FORM_MODAL({
+    title: 'USER-FORM',
+    innerForm: {
+      formName: 'UserForm',
+    },
+    useStore: useProfileStore,
+    stateName: 'SearchForm',
+    resetAction: 'RESET_SEARCH_FORM',
+    submitAction: 'POST_GAME_SEARCH',
+  })
 }
 </script>

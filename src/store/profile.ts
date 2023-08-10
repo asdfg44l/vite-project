@@ -1,6 +1,5 @@
 import { defineStore } from 'pinia'
 import { Payload } from '@/classes'
-import { POST_GAME_SEARCH } from '@/services/api'
 
 class SearchFormPayload extends Payload<POST_GAME_SEARCH_PAYLOAD> {
   type = ''
@@ -55,11 +54,17 @@ export default defineStore('profile', {
   state: (): PROFILE_STATE => _initState(),
   actions: {
     async POST_GAME_SEARCH(payload: SearchFormPayload) {
+      payload = new SearchFormPayload(payload)
+
       const params = payload.convertToAPIVariables()
+      console.log(params)
 
-      const response = await POST_GAME_SEARCH(params)
+      // const response = await POST_GAME_SEARCH(params)
 
-      this.GameList = new SearchFormResponse(response)
+      // this.GameList = new SearchFormResponse(response)
+    },
+    RESET_SEARCH_FORM() {
+      Object.assign(this.SearchForm, new SearchFormPayload())
     },
   },
 })
